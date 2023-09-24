@@ -17,7 +17,7 @@ struct funcionario
 
 //Funcionario *criaLista(void)
 
-//string trataString(char *nome)
+//char trataString(char *nome)
 
 //void insereLista(Funcionario *ponteiroLista, char *nome)
 
