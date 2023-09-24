@@ -1,1 +1,1 @@
-
+typedef struct funcionario Funcionario;
