@@ -54,7 +54,7 @@ void imprimeEmpresa(Empresa *empresa)
     }
     printf("Valor: R$ %.2f\n", empresa->valor);
 }
-/*
+
 void liberaEmpresa(Empresa *empresa)
 {
     if (empresa != NULL)
@@ -71,6 +71,6 @@ void liberaEmpresa(Empresa *empresa)
         printf("Empresa liberada da memória.\n");
     }
 }
-*/
+
 
 

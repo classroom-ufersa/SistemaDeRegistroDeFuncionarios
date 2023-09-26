@@ -9,7 +9,7 @@ int main()
     
     printf("Dados da Empresa:\n");
     imprimeEmpresa(minhaEmpresa);
-    free(minhaEmpresa);
+    liberaEmpresa(minhaEmpresa);
     
     return 0;
 }
