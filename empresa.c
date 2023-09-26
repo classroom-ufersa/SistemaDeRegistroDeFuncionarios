@@ -60,17 +60,10 @@ void liberaEmpresa(Empresa *empresa)
     if (empresa != NULL)
     {
         free(empresa->funcionarios);
-
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++){
             free(empresa->cargos[i]);
         }
-
         free(empresa);
-
         printf("Empresa liberada da memória.\n");
     }
 }
-
-
-
