@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "funcionario.h"
 
 struct funcionario
@@ -13,7 +15,7 @@ struct funcionario
     int jornadaTrabalho;
     struct funcionario *proximo;
     struct funcionario *anterior;
-}funcionario;
+};
 
 int TrataNome(char nome[21])
 {
@@ -21,14 +23,14 @@ int TrataNome(char nome[21])
   
     //Verifica se o nome é muito pequeno
     if(TamanhoNome <= 2){
-        printf("Nome muito pequeno\n");
+        printf("Nome Muito Pequeno\n");
         return 1;
     }
     
     //Verifica se o nome contém caracteres especiais
     for(i = 0; nome[i] != '\0'; i++){
         if(!isalnum(nome[i]) && nome[i] != ' '){
-            printf("Entrada Inválida\n");
+            printf("Nome Inválidao\n");
             return 1;
         }
     }
