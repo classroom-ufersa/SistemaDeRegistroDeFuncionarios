@@ -47,4 +47,60 @@ int trataNome(char nome[21])
 
 //void insereLista(Funcionario *ponteiroLista, char *nome)
 
-//Funcionario *retiraLista(Funcionario *ponteiroLista, char *nome)
+/* ListaFuncionarios *insereLista(ListaFuncionarios *ponteiroLista, char nome[21], char cpf[21], char cargo[21], char setor[21], float salario, char dataContratacao[21], int jornadaTrabalho) {
+    ListaFuncionarios *novoFuncionario = (ListaFuncionarios *)malloc(sizeof(ListaFuncionarios));
+    if (novoFuncionario == NULL) {
+        printf("Erro ao alocar memória para o novo funcionário.\n");
+        return ponteiroLista; // Retorna a lista original
+    }
+
+    strcpy(novoFuncionario->funcionario.nome, nome);
+    strcpy(novoFuncionario->funcionario.cpf, cpf);
+    strcpy(novoFuncionario->funcionario.cargo, cargo);
+    strcpy(novoFuncionario->funcionario.setor, setor);
+    novoFuncionario->funcionario.salario = salario;
+    strcpy(novoFuncionario->funcionario.dataContratacao, dataContratacao);
+    novoFuncionario->funcionario.jornadaTrabalho = jornadaTrabalho;
+
+    novoFuncionario->proximo = ponteiroLista; // Insere no início da lista
+    novoFuncionario->anterior = NULL; // Não há elemento anterior ao primeiro
+    
+    if (ponteiroLista != NULL) {
+        ponteiroLista->anterior = novoFuncionario; // Atualiza o anterior do próximo nó, se não for nulo
+    }
+    
+    return novoFuncionario; 
+}
+/* 
+    ListaFuncionarios *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) {
+    ListaFuncionarios *atual = ponteiroLista;
+
+    while (atual != NULL) {
+        if (strcmp(atual->funcionario.nome, nome) == 0) {
+            if (atual->anterior != NULL) {
+                atual->anterior->proximo = atual->proximo; 
+            }
+            if (atual->proximo != NULL) {
+                atual->proximo->anterior = atual->anterior; 
+            }
+
+            if (atual == ponteiroLista) {
+                ponteiroLista = atual->proximo; 
+            }
+
+            free(atual); 
+            return ponteiroLista; 
+        }
+
+        atual = atual->proximo;
+    }
+
+    printf("Funcionário com nome '%s' não encontrado na lista.\n", nome);
+    return ponteiroLista; 
+}
+*/
+
+
+
+
+
