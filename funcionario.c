@@ -17,12 +17,12 @@ struct funcionario
     struct funcionario *anterior;
 };
 
-int TrataNome(char nome[21])
+int trataNome(char nome[21])
 {
-    int i, TamanhoNome = strlen(nome);
+    int i, tamanhoNome = strlen(nome);
   
     //Verifica se o nome é muito pequeno
-    if(TamanhoNome <= 2){
+    if(tamanhoNome <= 2){
         printf("Nome Muito Pequeno\n");
         return 1;
     }

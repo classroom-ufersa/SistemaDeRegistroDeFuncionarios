@@ -5,10 +5,10 @@
 
 int main()
 {
-    Empresa *minhaEmpresa = CriaEmpresa();
+    Empresa *minhaEmpresa = criaEmpresa();
     
     printf("Dados da Empresa:\n");
-    ImprimeEmpresa(minhaEmpresa);
+    imprimeEmpresa(minhaEmpresa);
     free(minhaEmpresa);
     
     return 0;

@@ -1,5 +1,5 @@
 typedef struct empresa Empresa;
 
-Empresa *CriaEmpresa(void);
+Empresa *criaEmpresa(void);
 
-void ImprimeEmpresa(Empresa *empresa);
+void imprimeEmpresa(Empresa *empresa);

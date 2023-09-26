@@ -16,7 +16,7 @@ struct empresa
     float valor;
 };
 
-Empresa *CriaEmpresa(void)
+Empresa *criaEmpresa(void)
 {
     Empresa *empresa = (Empresa *) malloc(sizeof(Empresa));
     if(empresa == NULL){
@@ -40,7 +40,7 @@ Empresa *CriaEmpresa(void)
     return empresa;
 }
 
-void ImprimeEmpresa(Empresa *empresa)
+void imprimeEmpresa(Empresa *empresa)
 {
     printf("CNPJ: %s\n", empresa->cnpj);
     printf("Nome: %s\n", empresa->nome);
