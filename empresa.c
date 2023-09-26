@@ -48,7 +48,7 @@ void ImprimeEmpresa(Empresa *empresa)
     printf("Quantidade de Funcionários: %d\n", empresa->quantFuncionarios);
     printf("Receita: R$ %.2f\n", empresa->receita);
     printf("Cargos:\n");
-    for (int i = 0; i < 5; i++)
+    for(int i = 0; i < 5; i++)
     {
         printf("- %s\n", empresa->cargos[i]);
     }
