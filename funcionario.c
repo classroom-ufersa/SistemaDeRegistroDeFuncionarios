@@ -25,7 +25,7 @@ int TrataNome(char nome[21])
         return 1;
     }
     
-    //Verifica se o nome contém caracteres não alfanuméricos nem espaços em branco
+    //Verifica se o nome contém caracteres especiais
     for(i = 0; nome[i] != '\0'; i++){
         if(!isalnum(nome[i]) && nome[i] != ' '){
             printf("Entrada Inválida\n");
@@ -33,7 +33,7 @@ int TrataNome(char nome[21])
         }
     }
     
-    //Converte o nome para maiúsculas
+    //Converte o nome para maiúsculo
     for(i = 0; nome[i] != '\0'; i++){
         nome[i] = toupper(nome[i]);
     }
