@@ -9,8 +9,6 @@ int main()
     char nome[21], documento[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
-    Funcionario *lista = criaLista;
-    empresa->funcionarios = lista;
     do
     {
         printf("MENU\n");
@@ -68,7 +66,6 @@ int main()
                     }while(resultado != 0);
                     
                     empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
-
                     empresa->quantFuncionarios++;
                     break;
 
