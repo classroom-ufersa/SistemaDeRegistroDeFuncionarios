@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "empresa.h"
-#include "funcionario.h"
+#include "empresa.c"
+#include "funcionario.c"
 
 int main()
 {
@@ -9,6 +9,8 @@ int main()
     char nome[21], documento[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
+    Funcionario *lista = criaLista;
+    empresa->funcionarios = lista;
     do
     {
         printf("MENU\n");
