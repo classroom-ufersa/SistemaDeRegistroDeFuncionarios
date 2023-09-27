@@ -121,4 +121,24 @@ Funcionario*BuscaFuncionario(Funcionario*ponteiroLista,char*nome){
 
 */
 
+/*
+void imprimeFuncionarios(Funcionario *ponteiroLista) {
+    Funcionario *atual = ponteiroLista;
+
+    printf("Lista de Funcionários:\n");
+    
+    while (atual != NULL) {
+        printf("Nome: %s\n", atual->nome);
+        printf("CPF: %s\n", atual->cpf);
+        printf("Cargo: %s\n", atual->cargo);
+        printf("Setor: %s\n", atual->setor);
+        printf("Salário: %.2f\n", atual->salario);
+        printf("Data de Contratação: %s\n", atual->dataContratacao);
+        printf("Jornada de Trabalho: %s\n", atual->jornadaTrabalho);
+         
+        
+        atual = atual->proximo; 
+    }
+}
+*/
 
