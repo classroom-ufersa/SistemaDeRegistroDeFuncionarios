@@ -65,7 +65,7 @@ int main()
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
                     
-                    empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
+                    //insereFuncionario(empresa->funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
                     empresa->quantFuncionarios++;
                     break;
 
@@ -90,6 +90,7 @@ int main()
             default:
         }
     }while(opcao1 != 8);
+    imprimeEmpresa(empresa);
     liberaEmpresa(empresa);
     return 0;
 }
