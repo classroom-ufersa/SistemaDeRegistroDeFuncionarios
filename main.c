@@ -25,7 +25,6 @@ int main()
         switch(opcao1)
         {
             case 1:
-                    //tranformar esses do-while em uma unica função
                     do
                     {   
                         printf("Informe seu nome: ");
