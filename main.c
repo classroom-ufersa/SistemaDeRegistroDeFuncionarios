@@ -25,6 +25,7 @@ int main()
         switch(opcao1)
         {
             case 1:
+                    //tranformar esses do-while em uma unica função
                     do
                     {   
                         printf("Informe seu nome: ");
@@ -64,7 +65,9 @@ int main()
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
                     
-                    empresa.funcionarios = insereLista(empresa.funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
+                    empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
+
+                    empresa->quantFuncionarios++;
                     break;
 
             case 2:

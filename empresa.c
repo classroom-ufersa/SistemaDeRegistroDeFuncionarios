@@ -30,11 +30,20 @@ Empresa *criaEmpresa(void)
     empresa->quantFuncionarios = 0;
     empresa->funcionarios = NULL;
     empresa->receita = 1500000.0;
-    empresa->cargos[0] = "Gerente";
-    empresa->cargos[1] = "Analista";
-    empresa->cargos[2] = "Assistente";
-    empresa->cargos[3] = "Desenvolvedor";
-    empresa->cargos[4] = "Estagiário";
+
+    for(int i = 0; i < 5; i++){
+        empresa->cargos[i] = (char *)malloc(21 * sizeof(char));
+        if(empresa->cargos[i] == NULL){
+            printf("Erro ao alocar memória\n");
+            exit(1); // Ou trate o erro de acordo com suas necessidades
+        }
+    }
+    strcpy(empresa->cargos[0], "Gerente");
+    strcpy(empresa->cargos[1], "Analista");
+    strcpy(empresa->cargos[2], "Assistente");
+    strcpy(empresa->cargos[3], "Desenvolvedor");
+    strcpy(empresa->cargos[4], "Estagiário");
+
     empresa->valor = 500000.0;
     
     return empresa;
