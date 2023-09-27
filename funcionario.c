@@ -142,3 +142,20 @@ void imprimeFuncionarios(Funcionario *ponteiroLista) {
 }
 */
 
+/*
+int contaFuncionarios(Funcionario *ponteiroLista) {
+    int contador = 0;
+    Funcionario *atual = ponteiroLista;
+
+    while (atual != NULL) {
+        contador++;
+        atual = atual->proximo;
+    }
+
+    return contador;
+}
+
+int quantidadedeFuncionarios = contaFuncionarios(ponteiroParaLista); 
+printf("Total de funcionários na lista: %d\n", quantidadedeFuncionarios);
+
+*/
