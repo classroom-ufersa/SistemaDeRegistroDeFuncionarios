@@ -107,8 +107,18 @@ Funcionario *retiraLista(ListaFuncionarios *ponteiroLista, char *nome)
     return ponteiroLista; 
 }
 */
+/*
+Funcionario*BuscaFuncionario(Funcionario*ponteiroLista,char*nome){
+    Funcionario*atual=ponteiroLista;
+    while(atual!=NULL){
+        if (strcmp(atual->nome, nome) == 0 ){
+            return atual;
+        }
+        atual= atual->proximo;
+    }
+    return NULL;
+}
 
-
-
+*/
 
 
