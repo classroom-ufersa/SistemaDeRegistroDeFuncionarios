@@ -43,6 +43,15 @@ int trataNome(char nome[21])
     return 0;
 }
 
+void LimpaBuffer(void)
+{
+    int valorLido; 
+    do
+    {
+        valorLido = getchar(); 
+    } while ((valorLido != '\n') && (valorLido != EOF)); 
+}
+
 Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada) 
 {
     Funcionario *novoFuncionario = (Funcionario *)malloc(sizeof(Funcionario));
@@ -69,10 +78,10 @@ Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *doc
 }
 
 
-
-/* 
-    ListaFuncionarios *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) {
-    ListaFuncionarios *atual = ponteiroLista;
+/*
+Funcionario *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) 
+{
+    Funcionario *atual = ponteiroLista;
 
     while (atual != NULL) {
         if (strcmp(atual->funcionario.nome, nome) == 0) {
