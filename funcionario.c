@@ -12,7 +12,7 @@ struct funcionario
     char setor[21];
     float salario;
     char dataContratacao[21];
-    int jornadaTrabalho;
+    char jornadaTrabalho;
     struct funcionario *proximo;
     struct funcionario *anterior;
 };
@@ -29,7 +29,7 @@ int trataNome(char nome[21])
     
     //Verifica se o nome contém caracteres especiais
     for(i = 0; nome[i] != '\0'; i++){
-        if(!isalnum(nome[i]) && nome[i] != ' '){
+        if(!isalnum(nome[i]) && nome[i] != ' ' && nome[i] != '/'){
             printf("Nome Inválidao\n");
             return 1;
         }
@@ -43,34 +43,34 @@ int trataNome(char nome[21])
     return 0;
 }
 
-//Funcionario *criaLista(void)
 
-//void insereLista(Funcionario *ponteiroLista, char *nome)
-
-/* ListaFuncionarios *insereLista(ListaFuncionarios *ponteiroLista, char nome[21], char cpf[21], char cargo[21], char setor[21], float salario, char dataContratacao[21], int jornadaTrabalho) {
+/*ListaFuncionarios *insereLista(ListaFuncionarios *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada) 
+{
     ListaFuncionarios *novoFuncionario = (ListaFuncionarios *)malloc(sizeof(ListaFuncionarios));
-    if (novoFuncionario == NULL) {
+    if(novoFuncionario == NULL){
         printf("Erro ao alocar memória para o novo funcionário.\n");
         return ponteiroLista; // Retorna a lista original
     }
 
-    strcpy(novoFuncionario->funcionario.nome, nome);
-    strcpy(novoFuncionario->funcionario.cpf, cpf);
-    strcpy(novoFuncionario->funcionario.cargo, cargo);
-    strcpy(novoFuncionario->funcionario.setor, setor);
-    novoFuncionario->funcionario.salario = salario;
-    strcpy(novoFuncionario->funcionario.dataContratacao, dataContratacao);
-    novoFuncionario->funcionario.jornadaTrabalho = jornadaTrabalho;
+
 
     novoFuncionario->proximo = ponteiroLista; // Insere no início da lista
     novoFuncionario->anterior = NULL; // Não há elemento anterior ao primeiro
     
-    if (ponteiroLista != NULL) {
+    if(ponteiroLista != NULL){
         ponteiroLista->anterior = novoFuncionario; // Atualiza o anterior do próximo nó, se não for nulo
     }
     
     return novoFuncionario; 
 }
+
+
+
+
+
+
+
+
 /* 
     ListaFuncionarios *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) {
     ListaFuncionarios *atual = ponteiroLista;

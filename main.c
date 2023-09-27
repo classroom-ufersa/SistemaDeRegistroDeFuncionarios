@@ -5,8 +5,10 @@
 
 int main()
 {
-    int opcao1, opcao2;
-    Empresa *empresa = criaEmpresa(void);
+    int opcao1, opcao2, resultado;
+    char nome[21], documento[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
+    float salario;
+    Empresa *empresa = criaEmpresa();
     do
     {
         printf("MENU\n");
@@ -19,12 +21,51 @@ int main()
         printf("7. Consultar Quantitativo de Funcionário Por Cargos\n");
         printf("8. Sair\n");
         printf("Digite uma Opção: \n");
-        scanf(" %d", opcao2);
-        switch(opcao2)
+        scanf(" %d", &opcao1);
+        switch(opcao1)
         {
             case 1:
-            break;
-                
+                    do
+                    {   
+                        printf("Informe seu nome: ");
+                        scanf(" %[^\n]", nome);
+                        resultado = trataNome(nome);
+                    }while(resultado != 0);
+
+                    do
+                    {   
+                        printf("Informe seu documento: ");
+                        scanf(" %[^\n]", documento);
+                        resultado = trataNome(documento);
+                    }while(resultado != 0);
+                    
+                    do
+                    {   
+                        printf("Informe seu setor: ");
+                        scanf(" %[^\n]", setor);
+                        resultado = trataNome(setor);
+                    }while(resultado != 0);
+                    
+                   
+                    printf("Informe seu salário: ");
+                    scanf(" %f", &salario);
+
+                    do
+                    {   
+                        printf("Informe sua data de contratação: ");
+                        scanf(" %[^\n]", dataContratacao);
+                        resultado = trataNome(dataContratacao);
+                    }while(resultado != 0);
+
+                    do
+                    {   
+                        printf("Informe sua jornada de trabalho: ");
+                        scanf(" %[^\n]", jornadaTrabalho);
+                        resultado = trataNome(jornadaTrabalho);
+                    }while(resultado != 0);
+                   
+                    break;
+
             case 2:
             break;
 
@@ -46,6 +87,6 @@ int main()
             default:
         }
     }while(opcao1 != 8);
-    liberaEmpresa(empresa);
+    //liberaEmpresa(empresa);
     return 0;
 }
