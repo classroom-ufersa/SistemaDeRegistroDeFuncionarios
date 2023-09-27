@@ -1,3 +1,5 @@
 typedef struct funcionario Funcionario;
 
-int TrataNome(char nome[21]);
+int trataNome(char nome[21]);
+
+//ListaFuncionarios *insereLista(ListaFuncionarios *ponteiroLista);

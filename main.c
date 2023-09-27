@@ -63,7 +63,8 @@ int main()
                         scanf(" %[^\n]", jornadaTrabalho);
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
-                   
+                    
+                    empresa.funcionarios = insereLista(empresa.funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
                     break;
 
             case 2:
@@ -87,6 +88,6 @@ int main()
             default:
         }
     }while(opcao1 != 8);
-    //liberaEmpresa(empresa);
+    liberaEmpresa(empresa);
     return 0;
 }

@@ -27,7 +27,7 @@ Empresa *criaEmpresa(void)
     strcpy(empresa->cnpj, "12.345.678/0001-90");
     strcpy(empresa->nome, "Empresa");
     strcpy(empresa->localizacao, "Pau dos Ferros");
-    empresa->quantFuncionarios = 5;
+    empresa->quantFuncionarios = 0;
     empresa->funcionarios = NULL;
     empresa->receita = 1500000.0;
     empresa->cargos[0] = "Gerente";

@@ -44,7 +44,7 @@ int trataNome(char nome[21])
 }
 
 
-/*ListaFuncionarios *insereLista(ListaFuncionarios *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada) 
+ListaFuncionarios *insereLista(ListaFuncionarios *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada) 
 {
     ListaFuncionarios *novoFuncionario = (ListaFuncionarios *)malloc(sizeof(ListaFuncionarios));
     if(novoFuncionario == NULL){
@@ -52,7 +52,7 @@ int trataNome(char nome[21])
         return ponteiroLista; // Retorna a lista original
     }
 
-
+    
 
     novoFuncionario->proximo = ponteiroLista; // Insere no início da lista
     novoFuncionario->anterior = NULL; // Não há elemento anterior ao primeiro
