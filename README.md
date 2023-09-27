@@ -1,4 +1,6 @@
 # SistemaDeRegistroDeFuncionarios
+compilar: gcc -c empresa.c && gcc -c funcionario.c && gcc -c main.c && gcc -o prog empresa.o funcionario.o main.o
+
 
 Projeto 2 - Sistema de Registro de funcionários: Projete um sistema para gerenciamento de
 registro de funcionários. Seu sistema precisará manipular empresa e funcionários.
