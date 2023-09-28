@@ -42,6 +42,15 @@ int trataNome(char nome[21])
     return 0;
 }
 
+void LimpaBuffer(void)
+{
+    int valorLido; 
+    do
+    {
+        valorLido = getchar(); 
+    } while ((valorLido != '\n') && (valorLido != EOF)); 
+}
+
 Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
@@ -57,16 +66,22 @@ Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *doc
     strcpy(novo->dataContratacao, data);
     strcpy(novo->jornadaTrabalho, jornada);
 
-    novo->proximo = ponteiroLista; 
-
-    return novo;
+    novoFuncionario->proximo = ponteiroLista; // Insere no início da lista
+    novoFuncionario->anterior = NULL; // Não há elemento anterior ao primeiro
+    
+    if (ponteiroLista != NULL) {
+        ponteiroLista->anterior = novoFuncionario; // Atualiza o anterior do próximo nó, se não for nulo
+    }
+    
+    return novoFuncionario; // Retorna o novo início da lista
 }
 
 
 
-/* 
-    ListaFuncionarios *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) {
-    ListaFuncionarios *atual = ponteiroLista;
+/*
+Funcionario *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) 
+{
+    Funcionario *atual = ponteiroLista;
 
     while (atual != NULL) {
         if (strcmp(atual->funcionario.nome, nome) == 0) {
@@ -92,8 +107,55 @@ Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *doc
     return ponteiroLista; 
 }
 */
+/*
+Funcionario*BuscaFuncionario(Funcionario*ponteiroLista,char*nome){
+    Funcionario*atual=ponteiroLista;
+    while(atual!=NULL){
+        if (strcmp(atual->nome, nome) == 0 ){
+            return atual;
+        }
+        atual= atual->proximo;
+    }
+    return NULL;
+}
 
+*/
 
+/*
+void imprimeFuncionarios(Funcionario *ponteiroLista) {
+    Funcionario *atual = ponteiroLista;
 
+    printf("Lista de Funcionários:\n");
+    
+    while (atual != NULL) {
+        printf("Nome: %s\n", atual->nome);
+        printf("CPF: %s\n", atual->cpf);
+        printf("Cargo: %s\n", atual->cargo);
+        printf("Setor: %s\n", atual->setor);
+        printf("Salário: %.2f\n", atual->salario);
+        printf("Data de Contratação: %s\n", atual->dataContratacao);
+        printf("Jornada de Trabalho: %s\n", atual->jornadaTrabalho);
+         
+        
+        atual = atual->proximo; 
+    }
+}
+*/
 
+/*
+int contaFuncionarios(Funcionario *ponteiroLista) {
+    int contador = 0;
+    Funcionario *atual = ponteiroLista;
 
+    while (atual != NULL) {
+        contador++;
+        atual = atual->proximo;
+    }
+
+    return contador;
+}
+
+int quantidadedeFuncionarios = contaFuncionarios(ponteiroParaLista); 
+printf("Total de funcionários na lista: %d\n", quantidadedeFuncionarios);
+
+*/
