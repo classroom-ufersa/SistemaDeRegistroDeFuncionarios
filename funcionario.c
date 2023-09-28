@@ -7,7 +7,7 @@
 struct funcionario
 {
     char nome[21];
-    char cpf[21]; //usar union?
+    char documento[21]; 
     char cargo[21];
     char setor[21];
     float salario;
@@ -51,32 +51,41 @@ void LimpaBuffer(void)
     } while ((valorLido != '\n') && (valorLido != EOF)); 
 }
 
-Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada)
+Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
     if(novo == NULL){
-        printf("Erro ao alocar memória para o novo funcionário.\n");
+        printf("Erro ao alocar memória\n");
         exit(1);
     }
 
     strcpy(novo->nome, nome);
-    strcpy(novo->cpf, documento);
+    strcpy(novo->documento, documento);
+    strcpy(novo->cargo, cargo);
     strcpy(novo->setor, setor);
     novo->salario = salario;
     strcpy(novo->dataContratacao, data);
     strcpy(novo->jornadaTrabalho, jornada);
 
-    novoFuncionario->proximo = ponteiroLista; // Insere no início da lista
-    novoFuncionario->anterior = NULL; // Não há elemento anterior ao primeiro
-    
-    if (ponteiroLista != NULL) {
-        ponteiroLista->anterior = novoFuncionario; // Atualiza o anterior do próximo nó, se não for nulo
-    }
-    
-    return novoFuncionario; // Retorna o novo início da lista
+    novo->proximo = lista;
+
+    return novo;
 }
 
+void imprime(Funcionario *l)
+{
+	Funcionario* p;
+	for(p=l; p!=NULL; p=p->proximo){
+		printf("Nome: %s\n", p->nome);
+        printf("Documento: %s\n", p->documento);
+        printf("Cargo: %s\n", p->cargo);
+        printf("Setor: %s\n", p->setor);
+        printf("Salário: %f\n", p->salario);
+        printf("Data de Contratação: %s\n", p->dataContratacao);
+        printf("Jornada de Trabalho: %s\n", p->jornadaTrabalho);
+	}
 
+}
 
 /*
 Funcionario *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) 

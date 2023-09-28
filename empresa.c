@@ -10,7 +10,7 @@ struct empresa
     char nome[21];
     char localizacao[21];
     int quantFuncionarios;
-    struct Funcionario *funcionarios;
+    Funcionario *funcionarios;
     float receita;
     char *cargos[5];
     float valor;
@@ -20,10 +20,10 @@ Empresa *criaEmpresa(void)
 {
     Empresa *empresa = (Empresa *) malloc(sizeof(Empresa));
     if(empresa == NULL){
-        printf("Erro ao alocar memória!\n");
+        printf("Erro ao alocar memória\n");
         exit(1);
     }
-
+ 
     strcpy(empresa->cnpj, "12.345.678/0001-90");
     strcpy(empresa->nome, "Empresa");
     strcpy(empresa->localizacao, "Pau dos Ferros");

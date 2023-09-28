@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "funcionario.h"
-#include "empresa.h"
+#include "empresa.c"
+#include "funcionario.c"
 
 int main()
 {
     int opcao1, opcao2, resultado;
-    char nome[21], documento[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
+    char nome[21], documento[21], cargo[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
-    Funcionario *lista = NULL;
     do
     {
         printf("MENU\n");
@@ -26,6 +25,7 @@ int main()
         switch(opcao1)
         {
             case 1:
+                    //tranformar esses do-while em uma unica função
                     do
                     {   
                         printf("Informe seu nome: ");
@@ -38,6 +38,13 @@ int main()
                         printf("Informe seu documento: ");
                         scanf(" %[^\n]", documento);
                         resultado = trataNome(documento);
+                    }while(resultado != 0);
+
+                    do
+                    {   
+                        printf("Informe seu cargo: ");
+                        scanf(" %[^\n]", cargo);
+                        resultado = trataNome(cargo);
                     }while(resultado != 0);
                     
                     do
@@ -65,7 +72,10 @@ int main()
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
                     
-                    lista = insereFuncionario(lista, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
+                    empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                    empresa->quantFuncionarios++;
+                    printf("Funcionário cadastrado com sucesso.\n");
+
                     break;
 
             case 2:
@@ -89,7 +99,7 @@ int main()
             default:
         }
     }while(opcao1 != 8);
-    imprimeEmpresa(empresa);
+    imprime(empresa->funcionarios);
     liberaEmpresa(empresa);
     return 0;
 }
