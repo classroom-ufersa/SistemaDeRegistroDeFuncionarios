@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "empresa.c"
-#include "funcionario.c"
+#include "funcionario.h"
+#include "empresa.h"
 
 int main()
 {
@@ -9,6 +9,7 @@ int main()
     char nome[21], documento[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
+    Funcionario *lista = NULL;
     do
     {
         printf("MENU\n");
@@ -64,8 +65,7 @@ int main()
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
                     
-                    //insereFuncionario(empresa->funcionarios, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
-                    empresa->quantFuncionarios++;
+                    lista = insereFuncionario(lista, nome, documento, setor, salario, dataContratacao, jornadaTrabalho);
                     break;
 
             case 2:

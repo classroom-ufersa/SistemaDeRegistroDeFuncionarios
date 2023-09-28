@@ -14,7 +14,6 @@ struct funcionario
     char dataContratacao[21];
     char jornadaTrabalho[21];
     struct funcionario *proximo;
-    struct funcionario *anterior;
 };
 
 int trataNome(char nome[21])
@@ -43,29 +42,24 @@ int trataNome(char nome[21])
     return 0;
 }
 
-Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada) 
+Funcionario *insereFuncionario(Funcionario *ponteiroLista, char *nome, char *documento, char *setor, float salario, char *data, char *jornada)
 {
-    Funcionario *novoFuncionario = (Funcionario *)malloc(sizeof(Funcionario));
-    if (novoFuncionario == NULL) {
+    Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
+    if(novo == NULL){
         printf("Erro ao alocar memória para o novo funcionário.\n");
-        return ponteiroLista; // Retorna a lista original
+        exit(1);
     }
 
-    strcpy(novoFuncionario->nome, nome);
-    strcpy(novoFuncionario->cpf, documento);
-    strcpy(novoFuncionario->setor, setor);
-    novoFuncionario->salario = salario;
-    strcpy(novoFuncionario->dataContratacao, data);
-    strcpy(novoFuncionario->jornadaTrabalho, jornada);
+    strcpy(novo->nome, nome);
+    strcpy(novo->cpf, documento);
+    strcpy(novo->setor, setor);
+    novo->salario = salario;
+    strcpy(novo->dataContratacao, data);
+    strcpy(novo->jornadaTrabalho, jornada);
 
-    novoFuncionario->proximo = ponteiroLista; // Insere no início da lista
-    novoFuncionario->anterior = NULL; // Não há elemento anterior ao primeiro
-    
-    if (ponteiroLista != NULL) {
-        ponteiroLista->anterior = novoFuncionario; // Atualiza o anterior do próximo nó, se não for nulo
-    }
-    
-    return novoFuncionario; // Retorna o novo início da lista
+    novo->proximo = ponteiroLista; 
+
+    return novo;
 }
 
 

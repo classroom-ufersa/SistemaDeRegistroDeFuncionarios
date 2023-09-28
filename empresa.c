@@ -75,3 +75,4 @@ void liberaEmpresa(Empresa *empresa)
         printf("Empresa liberada da memória.\n");
     }
 }
+
