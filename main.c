@@ -9,9 +9,10 @@ int main()
     char nome[21], documento[21], cargo[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
+    FILE *arquivo;
     do
     {
-        printf("MENU\n");
+        printf("\n========== MENU ==========\n");
         printf("1. Cadastrar Funcionário\n");
         printf("2. Excluir Funcionário\n");
         printf("3. Listar Funcionário\n");
@@ -25,7 +26,6 @@ int main()
         switch(opcao1)
         {
             case 1:
-                    //tranformar esses do-while em uma unica função
                     do
                     {   
                         printf("Informe seu nome: ");
@@ -72,7 +72,7 @@ int main()
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
                     
-                    empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                    empresa->funcionarios = insereFuncionario(arquivo, empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
                     empresa->quantFuncionarios++;
                     printf("Funcionário cadastrado com sucesso.\n");
 
@@ -82,6 +82,7 @@ int main()
             break;
 
             case 3:
+                    imprime(empresa->funcionarios);
             break;
 
             case 4:
@@ -91,6 +92,7 @@ int main()
             break;
 
             case 6:
+                    printf("Receita: R$%d\n", empresa->receita);
             break;
 
             case 7:
@@ -99,7 +101,6 @@ int main()
             default:
         }
     }while(opcao1 != 8);
-    imprime(empresa->funcionarios);
     liberaEmpresa(empresa);
     return 0;
 }

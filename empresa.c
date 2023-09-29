@@ -11,7 +11,7 @@ struct empresa
     char localizacao[21];
     int quantFuncionarios;
     Funcionario *funcionarios;
-    float receita;
+    int receita;
     char *cargos[5];
     float valor;
 };
@@ -29,7 +29,7 @@ Empresa *criaEmpresa(void)
     strcpy(empresa->localizacao, "Pau dos Ferros");
     empresa->quantFuncionarios = 0;
     empresa->funcionarios = NULL;
-    empresa->receita = 1500000.0;
+    empresa->receita = 1500000;
     for(int i = 0; i < 5; i++){
         empresa->cargos[i] = (char *)malloc(21 * sizeof(char));
         if(empresa->cargos[i] == NULL){
@@ -54,7 +54,7 @@ void imprimeEmpresa(Empresa *empresa)
     printf("Nome: %s\n", empresa->nome);
     printf("Localização: %s\n", empresa->localizacao);
     printf("Quantidade de Funcionários: %d\n", empresa->quantFuncionarios);
-    printf("Receita: R$ %.2f\n", empresa->receita);
+    printf("Receita: R$ %.d\n", empresa->receita);
     printf("Cargos:\n");
     for(int i = 0; i < 5; i++)
     {

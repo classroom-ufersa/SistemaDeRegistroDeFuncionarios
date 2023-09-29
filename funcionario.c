@@ -51,13 +51,19 @@ void LimpaBuffer(void)
     } while ((valorLido != '\n') && (valorLido != EOF)); 
 }
 
-Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
+Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
     if(novo == NULL){
         printf("Erro ao alocar memória\n");
         exit(1);
     }
+
+    /*arquivo = fopen("funcionarios.txt", "a"); 
+    if(arquivo == NULL){
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
+    }*/
 
     strcpy(novo->nome, nome);
     strcpy(novo->documento, documento);
@@ -69,12 +75,23 @@ Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, 
 
     novo->proximo = lista;
 
+    /*fprintf(arquivo, "%s\n%s\n%s\n%s\n%.2f\n%s\n%s\n", novo->nome, novo->documento, novo->cargo, novo->setor, novo->salario, novo->dataContratacao, novo->jornadaTrabalho);
+    fclose(arquivo);
+    LimpaBuffer();*/
+
     return novo;
 }
+
+//função para copiar os dados do arquivo
+
+//função para concatenar as listas
+
+//função para ordenar os elementos da lista
 
 void imprime(Funcionario *l)
 {
 	Funcionario* p;
+
 	for(p=l; p!=NULL; p=p->proximo){
 		printf("Nome: %s\n", p->nome);
         printf("Documento: %s\n", p->documento);
@@ -84,7 +101,6 @@ void imprime(Funcionario *l)
         printf("Data de Contratação: %s\n", p->dataContratacao);
         printf("Jornada de Trabalho: %s\n", p->jornadaTrabalho);
 	}
-
 }
 
 /*
@@ -128,27 +144,6 @@ Funcionario*BuscaFuncionario(Funcionario*ponteiroLista,char*nome){
     return NULL;
 }
 
-*/
-
-/*
-void imprimeFuncionarios(Funcionario *ponteiroLista) {
-    Funcionario *atual = ponteiroLista;
-
-    printf("Lista de Funcionários:\n");
-    
-    while (atual != NULL) {
-        printf("Nome: %s\n", atual->nome);
-        printf("CPF: %s\n", atual->cpf);
-        printf("Cargo: %s\n", atual->cargo);
-        printf("Setor: %s\n", atual->setor);
-        printf("Salário: %.2f\n", atual->salario);
-        printf("Data de Contratação: %s\n", atual->dataContratacao);
-        printf("Jornada de Trabalho: %s\n", atual->jornadaTrabalho);
-         
-        
-        atual = atual->proximo; 
-    }
-}
 */
 
 /*
