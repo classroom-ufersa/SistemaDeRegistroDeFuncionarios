@@ -4,6 +4,7 @@
 #include "empresa.h"
 #include "funcionario.h"
 
+// Definição da estrutura Empresa
 struct empresa
 {
     char cnpj[21];
@@ -16,25 +17,32 @@ struct empresa
     float valor;
 };
 
+// Função para criar uma instância de Empresa com valores padrão
 Empresa *criaEmpresa(void)
 {
-    Empresa *empresa = (Empresa *) malloc(sizeof(Empresa));
-    if(empresa == NULL){
+    Empresa *empresa = (Empresa *)malloc(sizeof(Empresa));
+    if (empresa == NULL)
+    {
         printf("Erro ao alocar memória\n");
         exit(1);
     }
- 
+
+    // Inicialização dos campos com valores padrão
     strcpy(empresa->cnpj, "12.345.678/0001-90");
     strcpy(empresa->nome, "Empresa");
     strcpy(empresa->localizacao, "Pau dos Ferros");
     empresa->quantFuncionarios = 0;
     empresa->funcionarios = NULL;
     empresa->receita = 1500000;
-    for(int i = 0; i < 5; i++){
+
+    // Alocação de memória e inicialização dos cargos
+    for (int i = 0; i < 5; i++)
+    {
         empresa->cargos[i] = (char *)malloc(21 * sizeof(char));
-        if(empresa->cargos[i] == NULL){
+        if (empresa->cargos[i] == NULL)
+        {
             printf("Erro ao alocar memória\n");
-            exit(1); 
+            exit(1);
         }
     }
     strcpy(empresa->cargos[0], "Gerente");
@@ -44,35 +52,40 @@ Empresa *criaEmpresa(void)
     strcpy(empresa->cargos[4], "Estagiário");
 
     empresa->valor = 500000.0;
-    
+
     return empresa;
 }
 
+// Função para imprimir informações sobre a Empresa
 void imprimeEmpresa(Empresa *empresa)
 {
     printf("CNPJ: %s\n", empresa->cnpj);
     printf("Nome: %s\n", empresa->nome);
     printf("Localização: %s\n", empresa->localizacao);
     printf("Quantidade de Funcionários: %d\n", empresa->quantFuncionarios);
-    printf("Receita: R$ %.d\n", empresa->receita);
+    printf("Receita: R$ %d\n", empresa->receita);
     printf("Cargos:\n");
-    for(int i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         printf("- %s\n", empresa->cargos[i]);
     }
     printf("Valor: R$ %.2f\n", empresa->valor);
 }
 
+// Função para liberar a memória alocada para a Empresa
 void liberaEmpresa(Empresa *empresa)
 {
     if (empresa != NULL)
     {
         free(empresa->funcionarios);
-        for (int i = 0; i < 5; i++){
+
+        // Liberar memória dos cargos
+        for (int i = 0; i < 5; i++)
+        {
             free(empresa->cargos[i]);
         }
+
         free(empresa);
         printf("Empresa liberada da memória.\n");
     }
 }
-
