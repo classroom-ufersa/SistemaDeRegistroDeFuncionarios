@@ -4,29 +4,30 @@
 #include "empresa.h"
 #include "funcionario.h"
 
-// Definição da estrutura Empresa
+//Definição da estrutura Empresa
 struct empresa
 {
-    char cnpj[21];
-    char nome[21];
-    char localizacao[21];
-    int quantFuncionarios;
-    Funcionario *funcionarios;
-    int receita;
-    char *cargos[5];
-    float valor;
+    char cnpj[21]; //Documento da empresa
+    char nome[21]; //Nome da empresa
+    char localizacao[21]; //Localização da empresa
+    int quantFuncionarios; //Quantidade de funcionários da empresa
+    Funcionario *funcionarios; //Ponteiro para uma lista de funcionários
+    int receita; //Receita da empresa
+    char *cargos[5]; //Cargos da empresa
+    float valor; //Valor da empresa
 };
 
+//Função para criar a empresa
 Empresa *criaEmpresa(void)
 {
-    Empresa *empresa = (Empresa *)malloc(sizeof(Empresa));
+    Empresa *empresa = (Empresa *) malloc(sizeof(Empresa));
     if (empresa == NULL)
     {
         printf("Erro ao alocar memória\n");
         exit(1);
     }
 
-    // Inicialização dos campos com valores padrão
+    //Inicialização dos campos com valores padrão
     strcpy(empresa->cnpj, "12.345.678/0001-90");
     strcpy(empresa->nome, "Empresa");
     strcpy(empresa->localizacao, "Pau dos Ferros");
@@ -34,7 +35,7 @@ Empresa *criaEmpresa(void)
     empresa->funcionarios = NULL;
     empresa->receita = 1500000;
 
-    // Alocação de memória e inicialização dos cargos
+    //Alocação de memória e inicializa os cargos
     for (int i = 0; i < 5; i++)
     {
         empresa->cargos[i] = (char *)malloc(21 * sizeof(char));
@@ -55,7 +56,7 @@ Empresa *criaEmpresa(void)
     return empresa;
 }
 
-// Função para imprimir informações sobre a Empresa
+//Função para imprimir informações sobre a Empresa
 void imprimeEmpresa(Empresa *empresa)
 {
     printf("CNPJ: %s\n", empresa->cnpj);
@@ -71,7 +72,7 @@ void imprimeEmpresa(Empresa *empresa)
     printf("Valor: R$ %.2f\n", empresa->valor);
 }
 
-// Função para liberar a memória alocada para a Empresa
+//Função para liberar a memória alocada para a Empresa
 void liberaEmpresa(Empresa *empresa)
 {
     int i;
