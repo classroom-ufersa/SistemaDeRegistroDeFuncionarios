@@ -1,6 +1,5 @@
 typedef struct funcionario Funcionario;
 
-
 int trataNome(char nome[21]);
 
 void LimpaBuffer(void);

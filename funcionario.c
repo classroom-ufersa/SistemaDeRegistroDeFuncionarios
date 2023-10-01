@@ -42,7 +42,7 @@ int trataNome(char nome[21])
     
     return 0;
 }
-
+// Função para limpar o buffer
 void LimpaBuffer(void)
 {
     int valorLido; 
@@ -68,7 +68,7 @@ Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, 
     strcpy(novo->dataContratacao, data);
     strcpy(novo->jornadaTrabalho, jornada);
 
-    novo->proximo = lista;
+    novo->proximo = lista;// Define o próximo como o início da lista existente
 
     return novo;
 }
@@ -191,7 +191,7 @@ void escreveArquivo(Funcionario *lista, FILE *arquivo)
     fclose(arquivo);
 }
 
-void imprime(Funcionario *l)
+void imprime(Funcionario *l)// Função para imprimir a lista de funcionários
 {
 	Funcionario* p;
 
