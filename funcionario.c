@@ -41,7 +41,7 @@ int trataNome(char nome[21])
     
     return 0;
 }
-
+// Função para limpar o buffer
 void LimpaBuffer(void)
 {
     int valorLido; 
@@ -50,7 +50,7 @@ void LimpaBuffer(void)
         valorLido = getchar(); 
     } while ((valorLido != '\n') && (valorLido != EOF)); 
 }
-
+// Função para inserir um funcionário na lista
 Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
@@ -64,7 +64,7 @@ Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, c
         printf("Erro ao abrir o arquivo!\n");
         exit(1);
     }*/
-
+ // Copia os dados fornecidos para a estrutura do novo funcionário
     strcpy(novo->nome, nome);
     strcpy(novo->documento, documento);
     strcpy(novo->cargo, cargo);
@@ -73,7 +73,7 @@ Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, c
     strcpy(novo->dataContratacao, data);
     strcpy(novo->jornadaTrabalho, jornada);
 
-    novo->proximo = lista;
+    novo->proximo = lista;// Define o próximo como o início da lista existente
 
     /*fprintf(arquivo, "%s\n%s\n%s\n%s\n%.2f\n%s\n%s\n", novo->nome, novo->documento, novo->cargo, novo->setor, novo->salario, novo->dataContratacao, novo->jornadaTrabalho);
     fclose(arquivo);
@@ -88,7 +88,7 @@ Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, c
 
 //função para ordenar os elementos da lista
 
-void imprime(Funcionario *l)
+void imprime(Funcionario *l)// Função para imprimir a lista de funcionários
 {
 	Funcionario* p;
 
