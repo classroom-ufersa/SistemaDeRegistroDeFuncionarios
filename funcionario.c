@@ -73,77 +73,9 @@ Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, 
     return novo;
 }
 
-int quantificaFuncionarios(FILE *arquivo)
-{
-    int nlinhas = 0, c;
 
-    //Abre o arquivo para ler
-    arquivo = fopen("funcionarios.txt", "rt"); 
-    if(arquivo == NULL){
-        printf("Erro ao abrir!\n");
-        exit(1);
-    }
-
-    //Conta a quantidade de linhas do arquivo
-    while((c = fgetc(arquivo)) != EOF){
-        if(c == '\n'){
-            nlinhas++;
-        }
-    }
-
-    //Retorna a quantidade de funcionários
-    return nlinhas/7;
-}
 
 //função para copiar os dados do arquivo
-Funcionario *copiaDadosArquivo(FILE *arquivo, int quantFuncionarios)
-{
-    Funcionario *l = NULL;
-    int i;
-
-    arquivo = fopen("funcionarios.txt", "r"); 
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
-        exit(1);
-    }
-
-    for (i = 0; i < quantFuncionarios; i++) {
-        Funcionario *funcionario = (Funcionario *) malloc(sizeof(Funcionario));
-        if (funcionario == NULL) {
-            printf("Erro ao alocar memória\n");
-            exit(1);
-        }
-
-        fgets(funcionario->nome, 21, arquivo);
-        funcionario->nome[strcspn(funcionario->nome, "\n")] = '\0';
-
-        fgets(funcionario->documento, 21, arquivo);
-        funcionario->documento[strcspn(funcionario->documento, "\n")] = '\0';
-
-        fgets(funcionario->cargo, 21, arquivo);
-        funcionario->cargo[strcspn(funcionario->cargo, "\n")] = '\0';
-
-        fgets(funcionario->setor, 21, arquivo);
-        funcionario->setor[strcspn(funcionario->setor, "\n")] = '\0';
-
-        fscanf(arquivo, "%f", &funcionario->salario); 
-
-        fgets(funcionario->dataContratacao, 21, arquivo);
-        funcionario->dataContratacao[strcspn(funcionario->dataContratacao, "\n")] = '\0';
-
-        fgets(funcionario->jornadaTrabalho, 21, arquivo);
-        funcionario->jornadaTrabalho[strcspn(funcionario->jornadaTrabalho, "\n")] = '\0';
-
-        funcionario->proximo = l;
-        l = funcionario;
-    }
-
-    LimpaBuffer();
-
-    fclose(arquivo);
-
-    return l;
-}
 
 //função para concatenar as listas
 Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
