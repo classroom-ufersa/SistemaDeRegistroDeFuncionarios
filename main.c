@@ -5,11 +5,15 @@
 
 int main()
 {
-    int opcao1, opcao2, resultado;
+    int opcao1 = 0, opcao2 = 0, resultado = 0, totalFuncionarios = 0;
     char nome[21], documento[21], cargo[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
     FILE *arquivo;
+    int nfuncionarios;
+    Funcionario *ponteiroListaArquivo;
+    Funcionario *ponteiroConcatenado;
+
     do
     {
         printf("\n========== MENU ==========\n");
@@ -72,9 +76,28 @@ int main()
                         resultado = trataNome(jornadaTrabalho);
                     }while(resultado != 0);
                     
-                    empresa->funcionarios = insereFuncionario(arquivo, empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                    //Insere um novo funcionário na lista
+                    empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                    
+                    //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
+                    nfuncionarios = quantificaFuncionarios(arquivo);
+                    ponteiroListaArquivo = copiaDadosArquivo(arquivo, nfuncionarios);
+
+                    //Concatena as duas lista
+                    ponteiroConcatenado = concatenaListas(empresa->funcionarios, ponteiroListaArquivo);
+                    
+                    //Ordena a lista
+                    //qsort(ponteiroConcatenado, nfuncionarios, sizeof(Funcionario), compararNomes);
+
+                    //Escreve a lista no arquivo
+                    //escreveArquivo(ponteiroConcatenado, arquivo);
+
+
+
+                    //Atualiza a quantidade de funcionários da empresa
                     empresa->quantFuncionarios++;
                     printf("Funcionário cadastrado com sucesso.\n");
+                    
 
                     break;
 
@@ -82,7 +105,9 @@ int main()
             break;
 
             case 3:
-                    imprime(empresa->funcionarios);
+                    imprime(ponteiroConcatenado);
+                    liberaFuncionario(ponteiroConcatenado);
+
             break;
 
             case 4:
@@ -101,6 +126,7 @@ int main()
             default:
         }
     }while(opcao1 != 8);
+    liberaFuncionario(empresa->funcionarios);
     liberaEmpresa(empresa);
     return 0;
 }

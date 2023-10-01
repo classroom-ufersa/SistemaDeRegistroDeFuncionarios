@@ -16,6 +16,7 @@ struct funcionario
     struct funcionario *proximo;
 };
 
+
 int trataNome(char nome[21])
 {
     int i, tamanhoNome = strlen(nome);
@@ -51,19 +52,13 @@ void LimpaBuffer(void)
     } while ((valorLido != '\n') && (valorLido != EOF)); 
 }
 
-Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
+Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
     if(novo == NULL){
         printf("Erro ao alocar memória\n");
         exit(1);
     }
-
-    /*arquivo = fopen("funcionarios.txt", "a"); 
-    if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo!\n");
-        exit(1);
-    }*/
 
     strcpy(novo->nome, nome);
     strcpy(novo->documento, documento);
@@ -75,18 +70,126 @@ Funcionario *insereFuncionario(FILE * arquivo, Funcionario *lista, char *nome, c
 
     novo->proximo = lista;
 
-    /*fprintf(arquivo, "%s\n%s\n%s\n%s\n%.2f\n%s\n%s\n", novo->nome, novo->documento, novo->cargo, novo->setor, novo->salario, novo->dataContratacao, novo->jornadaTrabalho);
-    fclose(arquivo);
-    LimpaBuffer();*/
-
     return novo;
 }
 
+int quantificaFuncionarios(FILE *arquivo)
+{
+    int nlinhas = 0, c;
+
+    //Abre o arquivo para ler
+    arquivo = fopen("funcionarios.txt", "rt"); 
+    if(arquivo == NULL){
+        printf("Erro ao abrir!\n");
+        exit(1);
+    }
+
+    //Conta a quantidade de linhas do arquivo
+    while((c = fgetc(arquivo)) != EOF){
+        if(c == '\n'){
+            nlinhas++;
+        }
+    }
+
+    //Retorna a quantidade de funcionários
+    return nlinhas/7;
+}
+
 //função para copiar os dados do arquivo
+Funcionario *copiaDadosArquivo(FILE *arquivo, int quantFuncionarios)
+{
+    Funcionario *l = NULL;
+    int i;
+
+    arquivo = fopen("funcionarios.txt", "r"); 
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
+    }
+
+    for (i = 0; i < quantFuncionarios; i++) {
+        Funcionario *funcionario = (Funcionario *) malloc(sizeof(Funcionario));
+        if (funcionario == NULL) {
+            printf("Erro ao alocar memória\n");
+            exit(1);
+        }
+
+        fgets(funcionario->nome, 21, arquivo);
+        funcionario->nome[strcspn(funcionario->nome, "\n")] = '\0';
+
+        fgets(funcionario->documento, 21, arquivo);
+        funcionario->documento[strcspn(funcionario->documento, "\n")] = '\0';
+
+        fgets(funcionario->cargo, 21, arquivo);
+        funcionario->cargo[strcspn(funcionario->cargo, "\n")] = '\0';
+
+        fgets(funcionario->setor, 21, arquivo);
+        funcionario->setor[strcspn(funcionario->setor, "\n")] = '\0';
+
+        fscanf(arquivo, "%f", &funcionario->salario); 
+
+        fgets(funcionario->dataContratacao, 21, arquivo);
+        funcionario->dataContratacao[strcspn(funcionario->dataContratacao, "\n")] = '\0';
+
+        fgets(funcionario->jornadaTrabalho, 21, arquivo);
+        funcionario->jornadaTrabalho[strcspn(funcionario->jornadaTrabalho, "\n")] = '\0';
+
+        funcionario->proximo = l;
+        l = funcionario;
+    }
+
+    LimpaBuffer();
+
+    fclose(arquivo);
+
+    return l;
+}
 
 //função para concatenar as listas
+Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
+{
+    Funcionario *atual = lista1;
+    Funcionario * anterior = NULL;
 
-//função para ordenar os elementos da lista
+    while(atual != NULL){
+        anterior = atual;
+        atual = atual->proximo;
+        }
+
+    anterior->proximo = lista2;
+
+    return anterior;
+}
+
+//função para ordenar a lista em ordem alfabética
+int compararNomes(const void *a, const void *b)
+{
+    Funcionario *funcionarioA = (Funcionario *)a; //Converte o ponteiro
+    Funcionario *funcionarioB = (Funcionario *)b; //Converte o ponteiro
+    return strcmp(funcionarioA->nome, funcionarioB->nome); //compara as strings 
+}
+
+
+//Função para escrever a lista no arquivo
+void escreveArquivo(Funcionario *lista, FILE *arquivo)
+{
+    Funcionario *atual = lista;
+
+    arquivo = fopen("funcionarios.txt", "r"); 
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
+    }
+
+    while(atual != NULL){
+        fprintf(arquivo, "%s\n%s\n%s\n%s\n%f\n%s\n%s\n", atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
+        atual = atual->proximo;
+    }
+
+    LimpaBuffer();
+
+    fclose(arquivo);
+}
 
 void imprime(Funcionario *l)
 {
@@ -103,63 +206,15 @@ void imprime(Funcionario *l)
 	}
 }
 
-/*
-Funcionario *retiraLista(ListaFuncionarios *ponteiroLista, char *nome) 
+void liberaFuncionario(Funcionario *l)
 {
-    Funcionario *atual = ponteiroLista;
+    Funcionario* p = l;
+    Funcionario* t;
+    while (p != NULL) {
+        t = p->proximo;
+        free(p);
+        p = t;
 
-    while (atual != NULL) {
-        if (strcmp(atual->funcionario.nome, nome) == 0) {
-            if (atual->anterior != NULL) {
-                atual->anterior->proximo = atual->proximo; 
-            }
-            if (atual->proximo != NULL) {
-                atual->proximo->anterior = atual->anterior; 
-            }
-
-            if (atual == ponteiroLista) {
-                ponteiroLista = atual->proximo; 
-            }
-
-            free(atual); 
-            return ponteiroLista; 
-        }
-
-        atual = atual->proximo;
     }
-
-    printf("Funcionário com nome '%s' não encontrado na lista.\n", nome);
-    return ponteiroLista; 
-}
-*/
-/*
-Funcionario*BuscaFuncionario(Funcionario*ponteiroLista,char*nome){
-    Funcionario*atual=ponteiroLista;
-    while(atual!=NULL){
-        if (strcmp(atual->nome, nome) == 0 ){
-            return atual;
-        }
-        atual= atual->proximo;
-    }
-    return NULL;
 }
 
-*/
-
-/*
-int contaFuncionarios(Funcionario *ponteiroLista) {
-    int contador = 0;
-    Funcionario *atual = ponteiroLista;
-
-    while (atual != NULL) {
-        contador++;
-        atual = atual->proximo;
-    }
-
-    return contador;
-}
-
-int quantidadedeFuncionarios = contaFuncionarios(ponteiroParaLista); 
-printf("Total de funcionários na lista: %d\n", quantidadedeFuncionarios);
-
-*/

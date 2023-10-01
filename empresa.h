@@ -1,4 +1,8 @@
+
+
 typedef struct empresa Empresa;
+
+
 
 Empresa *criaEmpresa(void);
 

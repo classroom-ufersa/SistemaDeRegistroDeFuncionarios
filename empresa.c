@@ -16,6 +16,7 @@ struct empresa
     float valor;
 };
 
+
 Empresa *criaEmpresa(void)
 {
     Empresa *empresa = (Empresa *) malloc(sizeof(Empresa));
@@ -65,14 +66,12 @@ void imprimeEmpresa(Empresa *empresa)
 
 void liberaEmpresa(Empresa *empresa)
 {
-    if (empresa != NULL)
-    {
-        free(empresa->funcionarios);
-        for (int i = 0; i < 5; i++){
-            free(empresa->cargos[i]);
-        }
-        free(empresa);
-        printf("Empresa liberada da memória.\n");
+    int i;
+    for(i = 0; i < 5; i++){
+        free(empresa->cargos[i]);
     }
+    free(empresa);
+    printf("Empresa liberada da memória.\n");
+    
 }
 
