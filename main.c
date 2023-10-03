@@ -109,9 +109,34 @@ int main()
             break;
 
             case 4:
+                printf("Informe o nome do funcionário a ser buscado: ");
+    scanf(" %[^\n]", nome); 
+
+    Funcionario *funcionarioEncontrado = buscaFuncionarioPorNome(empresa->funcionarios, nome);
+
+    if (funcionarioEncontrado != NULL) {
+        printf("Funcionário encontrado:\n");
+        imprime(funcionarioEncontrado);
+    } else {
+        printf("Funcionário não encontrado.\n");
+    }
+    break;
             break;
 
             case 5:
+                printf("Informe o documento do funcionário a ser buscado: ");
+    scanf(" %[^\n]", documento); 
+
+    
+    Funcionario *funcionarioEncontrado = buscaFuncionarioPorDocumento(empresa->funcionarios, documento);
+
+    if (funcionarioEncontrado != NULL) {
+        printf("Funcionário encontrado:\n");
+        imprime(funcionarioEncontrado);
+    } else {
+        printf("Funcionário não encontrado.\n");
+    }
+    break;
             break;
 
             case 6:
