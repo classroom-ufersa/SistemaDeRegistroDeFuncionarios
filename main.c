@@ -5,14 +5,14 @@
 
 int main()
 {
-    int opcao1 = 0, opcao2 = 0, resultado = 0, totalFuncionarios = 0;
+    int opcao1 = 0, opcao2 = 0, resultado = 0, totalFuncionarios = 0, nfuncionarios = 0;
     char nome[21], documento[21], cargo[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
     float salario;
     Empresa *empresa = criaEmpresa();
+    Funcionario *listaArquivo = criaFuncionario();
+    Funcionario *listaConcatenada = criaFuncionario();
+    Funcionario *listaOrdenada = criaFuncionario();
     FILE *arquivo;
-    int nfuncionarios;
-    Funcionario *listaArquivo;
-    Funcionario *listaConcatenado;
 
     do
     {
@@ -30,8 +30,7 @@ int main()
         switch(opcao1)
         {
             case 1:
-                    /*
-                    do
+                    
                     {   
                         printf("Informe seu nome: ");
                         scanf(" %[^\n]", nome);
@@ -79,20 +78,14 @@ int main()
                     
                     //Insere um novo funcionário na lista
                     empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
-                    */
+
                     //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
-                    //nfuncionarios = quantificaFuncionarios(arquivo);
-                    listaArquivo = listaLerArquivo(arquivo);
-                    imprime(listaArquivo);
-
-                    //Concatena as duas lista
-                    //ponteiroConcatenado = concatenaListas(empresa->funcionarios, ponteiroListaArquivo);
+                    nfuncionarios = quantificaFuncionarios(arquivo);
+                    listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
                     
-                    //Ordena a lista
-                    //qsort(ponteiroConcatenado, nfuncionarios, sizeof(Funcionario), compararNomes);
-
-                    //Escreve a lista no arquivo
-                    //escreveArquivo(ponteiroConcatenado, arquivo);
+                    //Concatena as listas
+                    listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
+                    imprimeLista(listaConcatenada);
 
                     //Atualiza a quantidade de funcionários da empresa
                     empresa->quantFuncionarios++;
@@ -101,6 +94,7 @@ int main()
                     break;
 
             case 2:
+
             break;
 
             case 3:
@@ -124,8 +118,7 @@ int main()
             default:
         }
     }while(opcao1 != 8);
-    liberaFuncionario(empresa->funcionarios);
-    liberaFuncionario(listaConcatenado);
+    liberaFuncionario(listaArquivo);
     liberaEmpresa(empresa);
     return 0;
 }

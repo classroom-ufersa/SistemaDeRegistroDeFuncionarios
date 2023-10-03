@@ -11,11 +11,16 @@ struct funcionario
     char documento[51]; //Documento do funcionário
     char cargo[51]; //Cargo do funcionário
     char setor[51]; //Setor de trabalho do funcionário
-    float salario; //Salário do funcionário
+    int salario; //Salário do funcionário
     char dataContratacao[51]; //Data de contratação do funcionário
     char jornadaTrabalho[51]; //Jornada de tarabalho do funcionário
     struct funcionario *proximo; //Ponteiro para uma struct funcionário
 };
+
+Funcionario *criaFuncionario(void)
+{
+    return NULL;
+}
 
 //Função para corrigir as strings inseridos pelo usuário
 int trataNome(char nome[21])
@@ -54,8 +59,7 @@ void LimpaBuffer(void)
     } while ((valorLido != '\n') && (valorLido != EOF)); 
 }
 
-
-Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada)
+Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
     if(novo == NULL){
@@ -70,35 +74,73 @@ Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, 
     novo->salario = salario;
     strcpy(novo->dataContratacao, data);
     strcpy(novo->jornadaTrabalho, jornada);
-
-    novo->proximo = lista;// Define o próximo como o início da lista existente
+    novo->proximo = lista;
 
     return novo;
 }
 
-
-Funcionario *listaLerArquivo(FILE *arquivo)
+int quantificaFuncionarios(FILE *arquivo)
 {
-	char nome[51]; //Nome do funcionário
-    char documento[51]; //Documento do funcionário
-    char cargo[51]; //Cargo do funcionário
-    char setor[51]; //Setor de trabalho do funcionário
-    float salario; //Salário do funcionário
-    char dataContratacao[51]; //Data de contratação do funcionário
-    char jornadaTrabalho[51]; //Jornada de tarabalho do funcionário
+    int nlinhas = 1, c;
 
-	Funcionario *l = NULL;
-	arquivo = fopen("funcionarios.txt", "r");
-	if(arquivo == NULL){
-		printf("Erro ao abrir o arquivo!\n");
-		exit(1);
-	}
-	while(fscanf(arquivo, "%s%s%s%s%f%s%s", nome, documento, cargo, setor, &salario, dataContratacao, jornadaTrabalho) != EOF){
-		l = insereFuncionario(l, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
-	}
+    //Abre o arquivo para ler
+    arquivo = fopen("funcionarios.txt", "rt"); 
+    if(arquivo == NULL){
+        printf("Erro ao abrir!\n");
+        exit(1);
+    }
+
+    //Conta a quantidade de linhas do arquivo
+    while((c = fgetc(arquivo)) != EOF){
+        if(c == '\n'){
+            nlinhas++;
+        }
+    }
+
+    //Retorna a quantidade de funcionários
+    return nlinhas/7;
+}
+
+Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
+{
+    Funcionario *lista = criaFuncionario();
+    int i;
+    char nome[51]; 
+    char documento[51]; 
+    char cargo[51]; 
+    char setor[51]; 
+    int salario; 
+    char dataContratacao[51]; 
+    char jornadaTrabalho[51]; 
+    arquivo = fopen("funcionarios.txt", "r");
+    if(arquivo == NULL){
+        printf("Erro ao abrir arquivo\n");
+        exit(1);
+    }
+
+    for(i = 0; i < nfuncionarios; i++){
+        fgets(nome, 51, arquivo);
+        fgets(documento, 51, arquivo);
+        fgets(cargo, 51, arquivo);
+        fgets(setor, 51, arquivo);
+        fscanf(arquivo, "%d", &salario);
+        fgets(dataContratacao, 51, arquivo);
+        fgets(jornadaTrabalho, 51, arquivo);
+
+        nome[strcspn(nome, "\n")] = '\0';
+        documento[strcspn(documento, "\n")] = '\0';
+        cargo[strcspn(cargo, "\n")] = '\0';
+        setor[strcspn(setor, "\n")] = '\0';
+        dataContratacao[strcspn(dataContratacao, "\n")] = '\0';
+        jornadaTrabalho[strcspn(jornadaTrabalho, "\n")] = '\0';
+
+        lista = insereFuncionario(lista, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+
+        LimpaBuffer();
+    }   
     
-	fclose(arquivo);
-	return l;
+    fclose(arquivo);
+    return lista;
 }
 
 
@@ -120,12 +162,6 @@ Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
 }
 
 //função para ordenar a lista em ordem alfabética
-int compararNomes(const void *a, const void *b)
-{
-    Funcionario *funcionarioA = (Funcionario *)a; //Converte o ponteiro
-    Funcionario *funcionarioB = (Funcionario *)b; //Converte o ponteiro
-    return strcmp(funcionarioA->nome, funcionarioB->nome); //compara as strings 
-}
 
 
 //Função para escrever a lista no arquivo
@@ -140,7 +176,7 @@ void escreveArquivo(Funcionario *lista, FILE *arquivo)
     }
 
     while(atual != NULL){
-        fprintf(arquivo, "%s\n%s\n%s\n%s\n%f\n%s\n%s\n", atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
+        fprintf(arquivo, "%s\n%s\n%s\n%s\n%d\n%s\n%s\n", atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
         atual = atual->proximo;
     }
 
@@ -149,18 +185,12 @@ void escreveArquivo(Funcionario *lista, FILE *arquivo)
     fclose(arquivo);
 }
 
-void imprime(Funcionario *l)// Função para imprimir a lista de funcionários
+void imprimeLista(Funcionario *l)// Função para imprimir a lista de funcionários
 {
 	Funcionario* p;
 
 	for(p=l; p!=NULL; p=p->proximo){
-		printf("Nome: %s\n", p->nome);
-        printf("Documento: %s\n", p->documento);
-        printf("Cargo: %s\n", p->cargo);
-        printf("Setor: %s\n", p->setor);
-        printf("Salário: %f\n", p->salario);
-        printf("Data de Contratação: %s\n", p->dataContratacao);
-        printf("Jornada de Trabalho: %s\n", p->jornadaTrabalho);
+		printf("Nome: %s\nDocumento: %s\nCargo: %s\nSetor: %s\nSalário: %d\nData de Contratação: %s\nJornada de Trabalho: %s\n", p->nome, p->documento, p->cargo, p->setor, p->salario, p->dataContratacao, p->jornadaTrabalho);
 	}
 }
 

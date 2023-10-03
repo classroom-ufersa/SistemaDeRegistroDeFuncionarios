@@ -32,7 +32,7 @@ Empresa *criaEmpresa(void)
     strcpy(empresa->nome, "Empresa");
     strcpy(empresa->localizacao, "Pau dos Ferros");
     empresa->quantFuncionarios = 0;
-    empresa->funcionarios = NULL;
+    empresa->funcionarios = criaFuncionario();
     empresa->receita = 1500000;
 
     //Alocação de memória e inicializa os cargos
