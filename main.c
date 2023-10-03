@@ -109,34 +109,42 @@ int main()
             break;
 
             case 4:
-                printf("Informe o nome do funcionário a ser buscado: ");
-    scanf(" %[^\n]", nome); 
+               switch (opcao1) {
+     
+            printf("Informe o nome do funcionário a ser buscado: ");
+            scanf(" %[^\n]", nome); 
 
-    Funcionario *funcionarioEncontrado = buscaFuncionarioPorNome(empresa->funcionarios, nome);
+            
+            Funcionario *funcionarioEncontradoPorNome = buscaFuncionarioPorNome(empresa->funcionarios, nome);
 
-    if (funcionarioEncontrado != NULL) {
-        printf("Funcionário encontrado:\n");
-        imprime(funcionarioEncontrado);
-    } else {
-        printf("Funcionário não encontrado.\n");
-    }
-    break;
+            if (funcionarioEncontradoPorNome != NULL) {
+                printf("Funcionário encontrado:\n");
+                imprime(funcionarioEncontradoPorNome);
+            } else {
+                printf("Funcionário não encontrado.\n");
+            }
             break;
 
-            case 5:
-                printf("Informe o documento do funcionário a ser buscado: ");
-    scanf(" %[^\n]", documento); 
+        case 5: 
+            printf("Informe o documento do funcionário a ser buscado: ");
+            scanf(" %[^\n]", documento); // Lê o documento a ser buscado
 
-    
-    Funcionario *funcionarioEncontrado = buscaFuncionarioPorDocumento(empresa->funcionarios, documento);
+            
+            Funcionario *funcionarioEncontradoPorDocumento = buscaFuncionarioPorDocumento(empresa->funcionarios, documento);
 
-    if (funcionarioEncontrado != NULL) {
-        printf("Funcionário encontrado:\n");
-        imprime(funcionarioEncontrado);
-    } else {
-        printf("Funcionário não encontrado.\n");
+            if (funcionarioEncontradoPorDocumento != NULL) {
+                printf("Funcionário encontrado:\n");
+                imprime(funcionarioEncontradoPorDocumento);
+            } else {
+                printf("Funcionário não encontrado.\n");
+            }
+            break;
+
+        default:
+            printf("Opção inválida.\n");
+            break;
     }
-    break;
+   
             break;
 
             case 6:
