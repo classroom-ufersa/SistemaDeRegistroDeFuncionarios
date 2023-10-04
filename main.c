@@ -87,13 +87,19 @@ int main()
                     listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
                     imprimeLista(listaConcatenada);
 
+                    //Ordena lista
+                    listaOrdenada = ordenaLista(listaConcatenada);
+
+                    //Escrever lista ordenada no arquivo
+                    escreveArquivo(listaOrdenada, arquivo);
+
                     //Atualiza a quantidade de funcionários da empresa
                     empresa->quantFuncionarios++;
                     break;
             default:
         }
     }while(opcao1 != 8);
-    liberaFuncionario(listaConcatenada);
+    liberaFuncionario(listaOrdenada);
     liberaEmpresa(empresa);
     return 0;
 }

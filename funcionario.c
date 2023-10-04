@@ -162,19 +162,44 @@ Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
 }
 
 //função para ordenar a lista em ordem alfabética
+Funcionario *ordenaLista(Funcionario *lista)
+{
+    Funcionario *i = NULL;
+    Funcionario *j = NULL;
+
+    if (lista == NULL) {
+        printf("Lista Vazia\n");
+        return lista;
+    } else {
+        for (i = lista; i->proximo != NULL; i = i->proximo) {
+            Funcionario *maior = i;
+            for (j = i->proximo; j != NULL; j = j->proximo) {
+                if (strcmp(j->nome, maior->nome) > 0) {
+                    maior = j;
+                }
+            }
+            char aux[51];
+            strcpy(aux, i->nome);
+            strcpy(i->nome, maior->nome);
+            strcpy(maior->nome, aux);
+        }
+    }
+
+    return lista;
+}
 
 //Função para escrever a lista no arquivo
 void escreveArquivo(Funcionario *lista, FILE *arquivo)
 {
     Funcionario *atual = lista;
 
-    arquivo = fopen("funcionarios.txt", "w"); 
+    arquivo = fopen("funcionarios.txt", "w");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
+        printf("Erro: Ponteiro de arquivo inválido!\n");
         exit(1);
     }
 
-    while(atual != NULL){
+    while (atual != NULL) {
         fprintf(arquivo, "%s\n%s\n%s\n%s\n%d\n%s\n%s\n", atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
         atual = atual->proximo;
         LimpaBuffer();
