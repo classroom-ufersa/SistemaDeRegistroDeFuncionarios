@@ -30,44 +30,115 @@ int main()
         switch(opcao1)
         {
             case 1:
-                    do
-                    {   
-                        printf("Informe seu nome: ");
-                        scanf(" %[^\n]", nome);
-                        resultado = trataNome(nome);
-                    }while(resultado != 0);
+                    //Quantifica a quantidade de funcionários no arquivo
+                    nfuncionarios = quantificaFuncionarios(arquivo);
 
-                    do
-                    {   
-                        printf("Informe seu documento: ");
-                        scanf(" %[^\n]", documento);
-                        resultado = trataNome(documento);
-                    }while(resultado != 0);
+                    //Caso não tenha funcionários registrados no arquivo
+                    if(nfuncionarios == 0){
+                        //Repete o laço até 'opcao2' ser igual a 2
+                        do
+                        {
+                            do
+                            {   
+                                printf("Informe seu nome: ");
+                                scanf(" %[^\n]", nome);
+                                resultado = trataNome(nome);
+                            }while(resultado != 0);
 
-                    do
-                    {   
-                        printf("Informe seu cargo: ");
-                        scanf(" %[^\n]", cargo);
-                        resultado = trataNome(cargo);
-                    }while(resultado != 0);
-                    
-                    do
-                    {   
-                        printf("Informe seu setor: ");
-                        scanf(" %[^\n]", setor);
-                        resultado = trataNome(setor);
-                    }while(resultado != 0);
-                    
-                   
-                    printf("Informe seu salário: ");
-                    scanf(" %f", &salario);
+                            do
+                            {   
+                                printf("Informe seu documento: ");
+                                scanf(" %[^\n]", documento);
+                                resultado = trataNome(documento);
+                            }while(resultado != 0);
 
-                    do
-                    {   
-                        printf("Informe sua data de contratação: ");
-                        scanf(" %[^\n]", dataContratacao);
-                        resultado = trataNome(dataContratacao);
-                    }while(resultado != 0);
+                            do
+                            {   
+                                printf("Informe seu cargo: ");
+                                scanf(" %[^\n]", cargo);
+                                resultado = trataNome(cargo);
+                            }while(resultado != 0);
+                            
+                            do
+                            {   
+                                printf("Informe seu setor: ");
+                                scanf(" %[^\n]", setor);
+                                resultado = trataNome(setor);
+                            }while(resultado != 0);
+                            
+                            printf("Informe seu salário: ");
+                            scanf(" %f", &salario);
+
+                            do
+                            {   
+                                printf("Informe sua data de contratação: ");
+                                scanf(" %[^\n]", dataContratacao);
+                                resultado = trataNome(dataContratacao);
+                            }while(resultado != 0);
+
+                            do
+                            {   
+                                printf("Informe sua jornada de trabalho: ");
+                                scanf(" %[^\n]", jornadaTrabalho);
+                                resultado = trataNome(jornadaTrabalho);
+                            }while(resultado != 0);
+                            
+                            //Insere um novo funcionário na lista
+                            empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+
+                            printf("Deseja Continuar Cadastrando?\n");
+                            printf("1 - Sim\n");
+                            printf("2 - Não\n");
+                            scanf(" %d", &opcao2);
+
+                        }while(opcao2 != 2);
+
+                        //Escreve a lista no arquivo
+                        listaEscreveArquivo(empresa->funcionarios, arquivo);
+                    }
+
+                    //Caso contenha ao menos 1 funcionário registrado no arquivo
+                    else{
+                        //Repete o laço até 'opcao2' ser igual a 2
+                        do
+                        {
+                            do
+                            {   
+                                printf("Informe seu nome: ");
+                                scanf(" %[^\n]", nome);
+                                resultado = trataNome(nome);
+                            }while(resultado != 0);
+
+                            do
+                            {   
+                                printf("Informe seu documento: ");
+                                scanf(" %[^\n]", documento);
+                                resultado = trataNome(documento);
+                            }while(resultado != 0);
+
+                            do
+                            {   
+                                printf("Informe seu cargo: ");
+                                scanf(" %[^\n]", cargo);
+                                resultado = trataNome(cargo);
+                            }while(resultado != 0);
+                            
+                            do
+                            {   
+                                printf("Informe seu setor: ");
+                                scanf(" %[^\n]", setor);
+                                resultado = trataNome(setor);
+                            }while(resultado != 0);
+                            
+                            printf("Informe seu salário: ");
+                            scanf(" %f", &salario);
+
+                            do
+                            {   
+                                printf("Informe sua data de contratação: ");
+                                scanf(" %[^\n]", dataContratacao);
+                                resultado = trataNome(dataContratacao);
+                            }while(resultado != 0);
 
                     do
                     {   
@@ -85,18 +156,22 @@ int main()
                     
                     //Concatena as listas
                     listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
+                    imprimeLista(listaConcatenada);
 
                     //Ordena lista
                     listaOrdenada = ordenaLista(listaConcatenada);
-                    imprimeLista(listaOrdenada);
 
-                    //Escrever lista ordenada no arquivo
-                    escreveArquivo(listaOrdenada, arquivo);
+                        //Escrever lista ordenada no arquivo
+                        listaEscreveArquivo(listaOrdenada, arquivo);
+                    }
 
                     //Atualiza a quantidade de funcionários da empresa
                     empresa->quantFuncionarios++;
+
                     break;
+
             default:
+                break;
         }
     }while(opcao1 != 8);
     liberaFuncionario(listaOrdenada);

@@ -16,7 +16,7 @@ Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2);
 
 Funcionario *ordenaLista(Funcionario *lista);
 
-void escreveArquivo(Funcionario *lista, FILE *arquivo);
+void listaEscreveArquivo(Funcionario *lista, FILE *arquivo);
 
 void liberaFuncionario(Funcionario *l);
 
