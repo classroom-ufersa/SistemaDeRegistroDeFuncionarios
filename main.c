@@ -85,10 +85,10 @@ int main()
                     
                     //Concatena as listas
                     listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
-                    imprimeLista(listaConcatenada);
 
                     //Ordena lista
                     listaOrdenada = ordenaLista(listaConcatenada);
+                    imprimeLista(listaOrdenada);
 
                     //Escrever lista ordenada no arquivo
                     escreveArquivo(listaOrdenada, arquivo);
