@@ -84,7 +84,7 @@ int quantificaFuncionarios(FILE *arquivo)
     int nlinhas = 1, c;
 
     //Abre o arquivo para ler
-    arquivo = fopen("funcionarios.txt", "rt"); 
+    arquivo = fopen("funcionarios.txt", "r"); 
     if(arquivo == NULL){
         printf("Erro ao abrir!\n");
         exit(1);
@@ -143,8 +143,6 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
     return lista;
 }
 
-
-
 //função para concatenar as listas
 Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
 {
@@ -163,7 +161,6 @@ Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
 
 //função para ordenar a lista em ordem alfabética
 
-
 //Função para escrever a lista no arquivo
 void escreveArquivo(Funcionario *lista, FILE *arquivo)
 {
@@ -178,9 +175,8 @@ void escreveArquivo(Funcionario *lista, FILE *arquivo)
     while(atual != NULL){
         fprintf(arquivo, "%s\n%s\n%s\n%s\n%d\n%s\n%s\n", atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
         atual = atual->proximo;
+        LimpaBuffer();
     }
-
-    LimpaBuffer();
 
     fclose(arquivo);
 }
