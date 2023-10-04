@@ -109,7 +109,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
     char documento[51]; 
     char cargo[51]; 
     char setor[51]; 
-    int salario; 
+    char salarioStr[51]; 
     char dataContratacao[51]; 
     char jornadaTrabalho[51]; 
     arquivo = fopen("funcionarios.txt", "r");
@@ -123,7 +123,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
         fgets(documento, 51, arquivo);
         fgets(cargo, 51, arquivo);
         fgets(setor, 51, arquivo);
-        fscanf(arquivo, "%d", &salario);
+        fgets(salarioStr, 51, arquivo); 
         fgets(dataContratacao, 51, arquivo);
         fgets(jornadaTrabalho, 51, arquivo);
 
@@ -131,6 +131,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
         documento[strcspn(documento, "\n")] = '\0';
         cargo[strcspn(cargo, "\n")] = '\0';
         setor[strcspn(setor, "\n")] = '\0';
+        int salario = atoi(salarioStr); 
         dataContratacao[strcspn(dataContratacao, "\n")] = '\0';
         jornadaTrabalho[strcspn(jornadaTrabalho, "\n")] = '\0';
 
@@ -142,6 +143,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
     fclose(arquivo);
     return lista;
 }
+
 
 //função para concatenar as listas
 Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
