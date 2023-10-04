@@ -35,7 +35,7 @@ int trataNome(char nome[21])
     
     //Verifica se o nome contém caracteres especiais
     for(i = 0; nome[i] != '\0'; i++){
-        if(!isalnum(nome[i]) && nome[i] != ' ' && nome[i] != '/'){
+        if(!isalnum(nome[i]) && nome[i] != ' ' && nome[i] != '/' && nome[i] != '.'){
             printf("Entrada Inválido\n");
             return 1;
         }
@@ -144,7 +144,6 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
     return lista;
 }
 
-
 //função para concatenar as listas
 Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
 {
@@ -189,13 +188,13 @@ Funcionario *ordenaLista(Funcionario *lista)
 }
 
 //Função para escrever a lista no arquivo
-void escreveArquivo(Funcionario *lista, FILE *arquivo)
+void listaEscreveArquivo(Funcionario *lista, FILE *arquivo)
 {
     Funcionario *atual = lista;
 
     arquivo = fopen("funcionarios.txt", "w");
     if (arquivo == NULL) {
-        printf("Erro: Ponteiro de arquivo inválido!\n");
+        printf("Erro ao abrir arquivo\n");
         exit(1);
     }
 
