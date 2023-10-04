@@ -21,3 +21,4 @@ void listaEscreveArquivo(Funcionario *lista, FILE *arquivo);
 void liberaFuncionario(Funcionario *l);
 
 void imprimeLista(Funcionario *l);
+

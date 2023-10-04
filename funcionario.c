@@ -163,29 +163,33 @@ Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
 //função para ordenar a lista em ordem alfabética
 Funcionario *ordenaLista(Funcionario *lista)
 {
+    if(lista == NULL){
+        printf("Lista Vazia\n");
+        return lista;
+    }
+
     Funcionario *i = NULL;
     Funcionario *j = NULL;
 
-    if (lista == NULL) {
-        printf("Lista Vazia\n");
-        return lista;
-    } else {
-        for (i = lista; i->proximo != NULL; i = i->proximo) {
-            Funcionario *maior = i;
-            for (j = i->proximo; j != NULL; j = j->proximo) {
-                if (strcmp(j->nome, maior->nome) > 0) {
-                    maior = j;
-                }
+    for(i = lista; i->proximo != NULL; i = i->proximo){
+        Funcionario *menor = i; 
+        for(j = i->proximo; j != NULL; j = j->proximo){
+            if (strcmp(j->nome, menor->nome) < 0){
+                menor = j;
             }
+        }
+
+        if(menor != i){
             char aux[51];
             strcpy(aux, i->nome);
-            strcpy(i->nome, maior->nome);
-            strcpy(maior->nome, aux);
+            strcpy(i->nome, menor->nome);
+            strcpy(menor->nome, aux);
         }
     }
 
     return lista;
 }
+
 
 //Função para escrever a lista no arquivo
 void listaEscreveArquivo(Funcionario *lista, FILE *arquivo)

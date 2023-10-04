@@ -140,26 +140,31 @@ int main()
                                 resultado = trataNome(dataContratacao);
                             }while(resultado != 0);
 
-                    do
-                    {   
-                        printf("Informe sua jornada de trabalho: ");
-                        scanf(" %[^\n]", jornadaTrabalho);
-                        resultado = trataNome(jornadaTrabalho);
-                    }while(resultado != 0);
-                    
-                    //Insere um novo funcionário na lista
-                    empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
-                    
-                    //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
-                    nfuncionarios = quantificaFuncionarios(arquivo);
-                    listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
-                    
-                    //Concatena as listas
-                    listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
-                    imprimeLista(listaConcatenada);
+                            do
+                            {   
+                                printf("Informe sua jornada de trabalho: ");
+                                scanf(" %[^\n]", jornadaTrabalho);
+                                resultado = trataNome(jornadaTrabalho);
+                            }while(resultado != 0);
 
-                    //Ordena lista
-                    listaOrdenada = ordenaLista(listaConcatenada);
+                            printf("Deseja Continuar Cadastrando?\n");
+                            printf("1 - Sim\n");
+                            printf("2 - Não\n");
+                            scanf(" %d", &opcao2);
+                    }while(opcao2 != 2);
+
+                        //Insere um novo funcionário na lista
+                        empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                        
+                        //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
+                        nfuncionarios = quantificaFuncionarios(arquivo);
+                        listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+                        
+                        //Concatena as listas
+                        listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
+
+                        //Ordena lista
+                        listaOrdenada = ordenaLista(listaConcatenada);
 
                         //Escrever lista ordenada no arquivo
                         listaEscreveArquivo(listaOrdenada, arquivo);
