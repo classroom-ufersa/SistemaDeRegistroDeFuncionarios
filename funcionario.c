@@ -228,4 +228,79 @@ void liberaFuncionario(Funcionario *l)
 
     }
 }
+/*
+Funcionario *ordenaLista(Funcionario *lista)
+{
+    Funcionario *i = NULL;
+    Funcionario *j = NULL;
 
+    if (lista == NULL) {
+        printf("Lista Vazia\n");
+        return lista;
+    } else {
+        for (i = lista; i->proximo != NULL; i = i->proximo) {
+            Funcionario *menor = i;
+            for (j = i->proximo; j != NULL; j = j->proximo) {
+                if (strcmp(j->nome, menor->nome) < 0) {
+                    menor = j;
+                }
+            }
+            if (i != menor) {
+                Funcionario temp;
+                memcpy(&temp, i, sizeof(Funcionario));
+                memcpy(i, menor, sizeof(Funcionario));
+                memcpy(menor, &temp, sizeof(Funcionario));
+            }
+        }
+    }
+
+    return lista;
+}
+*/
+/*
+Funcionario *excluiFuncionarioPorNome(Funcionario *lista, char *nome)
+{
+    Funcionario *atual = lista;
+    Funcionario *anterior = NULL;
+    
+    while (atual != NULL) {
+        if (strcmp(atual->nome, nome) == 0) {
+            if (anterior != NULL) {
+                anterior->proximo = atual->proximo;
+            } else {
+                lista = atual->proximo;
+            }
+            free(atual);
+            return lista; // Retorna a lista atualizada após a exclusão
+        }
+        anterior = atual;
+        atual = atual->proximo;
+    }
+    
+    return lista; // Retorna a lista original se o funcionário não for encontrado
+}
+*/
+/*
+#include <stdbool.h>
+
+Funcionario *buscaFuncionarioPorNomeOuDocumento(Funcionario *lista, char *nomeOuDocumento)
+{
+    Funcionario *atual = lista;
+    Funcionario *resultados = NULL; // Lista para armazenar os resultados
+    bool encontrou = false; // Flag para indicar se foi encontrado pelo menos um funcionário
+
+    while (atual != NULL) {
+        if (strcmp(atual->nome, nomeOuDocumento) == 0 || strcmp(atual->documento, nomeOuDocumento) == 0) {
+            // Se o nome ou documento corresponderem, adiciona o funcionário aos resultados
+            resultados = insereFuncionario(resultados, atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
+            encontrou = true; // Indica que pelo menos um funcionário foi encontrado
+        }
+        atual = atual->proximo;
+    }
+
+    if (!encontrou) {
+        printf("Nenhum funcionário encontrado com o nome ou documento especificado.\n");
+    }
+
+    return resultados;
+*/ //(PEGUEI ESSA FUNÇÂO DA NET)
