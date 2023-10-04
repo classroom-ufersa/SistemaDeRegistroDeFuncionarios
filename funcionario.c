@@ -29,14 +29,14 @@ int trataNome(char nome[21])
   
     //Verifica se o nome é muito pequeno
     if(tamanhoNome <= 2){
-        printf("Entrada Muito Pequeno\n");
+        printf("Entrada Pequena\n");
         return 1;
     }
     
     //Verifica se o nome contém caracteres especiais
     for(i = 0; nome[i] != '\0'; i++){
         if(!isalnum(nome[i]) && nome[i] != ' ' && nome[i] != '/' && nome[i] != '.'){
-            printf("Entrada Inválido\n");
+            printf("Entrada Inválida\n");
             return 1;
         }
     }

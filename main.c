@@ -85,6 +85,7 @@ int main()
                             
                             //Insere um novo funcionário na lista
                             empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+
                             printf("Deseja Continuar Cadastrando?\n");
                             printf("1 - Sim\n");
                             printf("2 - Não\n");
@@ -148,6 +149,7 @@ int main()
                             
                             //Insere um novo funcionário na lista
                             empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+
                             printf("Deseja Continuar Cadastrando?\n");
                             printf("1 - Sim\n");
                             printf("2 - Não\n");
@@ -165,11 +167,12 @@ int main()
                         listaOrdenada = ordenaLista(listaConcatenada);
 
                         //Escrever lista ordenada no arquivo
-                        escreveArquivo(listaOrdenada, arquivo);
-
-                        //Atualiza a quantidade de funcionários da empresa
-                        empresa->quantFuncionarios++;
+                        listaEscreveArquivo(listaOrdenada, arquivo);
                     }
+
+                    //Atualiza a quantidade de funcionários da empresa
+                    empresa->quantFuncionarios++;
+
                     break;
 
             default:
