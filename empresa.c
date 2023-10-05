@@ -80,6 +80,4 @@ void liberaEmpresa(Empresa *empresa)
         free(empresa->cargos[i]);
     }
     free(empresa);
-    printf("Empresa liberada da memória.\n");
-    
 }

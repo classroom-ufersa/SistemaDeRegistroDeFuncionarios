@@ -5,9 +5,8 @@
 
 int main()
 {
-    int opcao1 = 0, opcao2 = 0, resultado = 0, totalFuncionarios = 0, nfuncionarios = 0;
-    char nome[21], documento[21], cargo[21], setor[21], dataContratacao[21], jornadaTrabalho[21];
-    float salario = 0;
+    int opcao1 = 0, opcao2 = 0, totalFuncionarios = 0, nfuncionarios = 0;
+
     Empresa *empresa = criaEmpresa();
     Funcionario *listaArquivo = criaFuncionario();
     Funcionario *listaConcatenada = criaFuncionario();
@@ -64,11 +63,11 @@ int main()
                             printf("1 - Sim\n");
                             printf("2 - Não\n");
                             scanf(" %d", &opcao2);
-                            
-                    }while(opcao2 != 2);
+
+                        }while(opcao2 != 2);
 
                         //Insere um novo funcionário na lista
-                        empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                        empresa->funcionarios = insereFuncionario1(empresa->funcionarios);
                         
                         //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
                         nfuncionarios = quantificaFuncionarios(arquivo);
@@ -86,14 +85,43 @@ int main()
 
                     //Atualiza a quantidade de funcionários da empresa
                     empresa->quantFuncionarios++;
+            system("clear");
+            break;
 
-                    break;
+            case 2:
+            system("clear");
+            break;
+
+            case 3:
+            system("clear");
+            break;
+
+            case 4:
+            system("clear");
+            break;
+
+            case 5:
+            system("clear");
+            break;
+
+            case 6:
+            system("clear");
+            break;
+
+            case 7:
+            system("clear");
+            break;
 
             default:
-                break;
+            if(opcao1 != 8){
+                printf("Opção Inválida\n");
+            }
+
+            break;
         }
     }while(opcao1 != 8);
     liberaFuncionario(listaOrdenada);
     liberaEmpresa(empresa);
+    printf("Programa Encerrado\n");
     return 0;
 }

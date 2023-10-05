@@ -22,28 +22,13 @@ Funcionario *criaFuncionario(void)
     return NULL;
 }
 
-/*int trataNome(char nome[21])
+//Função para corrigir as strings inseridas pelo usuário
+int trataString(char *string)
 {
-    int i;
-
-    //Verifica se o nome contém caracteres especiais
-    for(i = 0; nome[i] != '\0'; i++){
-        if(!isalpha(nome[i])){
-            printf("Entrada Inválida\n");
-            return 1;
-        }
-    }
-
-    return 0;
-}*/
-
-//Função para corrigir as strings inseridos pelo usuário
-int trataString(char string[21])
-{
-    int i, tamanhoNome = strlen(string);
+    int i, tamanhoString = strlen(string);
   
     //Verifica se o nome é muito pequeno
-    if(tamanhoNome <= 2){
+    if(tamanhoString <= 2){
         printf("Entrada Pequena\n");
         return 1;
     }
@@ -64,6 +49,17 @@ int trataString(char string[21])
     return 0;
 }
 
+void retiraQuebraLinha(char *string)
+{
+    int i, tamanhoString = strlen(string);
+
+    for(i = 0; string[i] != '\n'; i++){
+        if(string[i] == '\n'){
+            string[i] = '\0';
+            break;
+        }
+    }
+}
 
 Funcionario *insereFuncionario1(Funcionario *lista)
 {
@@ -84,6 +80,12 @@ Funcionario *insereFuncionario1(Funcionario *lista)
     {   
         printf("Informe seu nome: ");
         scanf(" %[^\n]", nome);
+        while(!isalpha(nome[0]))
+        {   
+            printf("Entrada Inválida\n");
+            printf("Informe seu nome: ");
+            scanf(" %[^\n]", nome); 
+        }
         resultado = trataString(nome);
     }while(resultado != 0);
 
@@ -98,6 +100,12 @@ Funcionario *insereFuncionario1(Funcionario *lista)
     {   
         printf("Informe seu cargo: ");
         scanf(" %[^\n]", cargo);
+        while(!isalpha(nome[0]))
+        {   
+            printf("Entrada Inválida\n");
+            printf("Informe seu nome: ");
+            scanf(" %[^\n]", nome); 
+        }
         resultado = trataString(cargo);
     }while(resultado != 0);
                             
@@ -105,6 +113,12 @@ Funcionario *insereFuncionario1(Funcionario *lista)
     {   
         printf("Informe seu setor: ");
         scanf(" %[^\n]", setor);
+        while(!isalpha(nome[0]))
+        {   
+            printf("Entrada Inválida\n");
+            printf("Informe seu nome: ");
+            scanf(" %[^\n]", nome); 
+        }
         resultado = trataString(setor);
     }while(resultado != 0);
                             
@@ -137,7 +151,6 @@ Funcionario *insereFuncionario1(Funcionario *lista)
 
     return novo;
 }
-
 
 // Função para limpar o buffer
 void LimpaBuffer(void)
@@ -217,13 +230,13 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
         fgets(dataContratacao, 51, arquivo);
         fgets(jornadaTrabalho, 51, arquivo);
 
-        nome[strcspn(nome, "\n")] = '\0';
-        documento[strcspn(documento, "\n")] = '\0';
-        cargo[strcspn(cargo, "\n")] = '\0';
-        setor[strcspn(setor, "\n")] = '\0';
+        retiraQuebraLinha(nome);
+        retiraQuebraLinha(documento);
+        retiraQuebraLinha(cargo);
+        retiraQuebraLinha(setor);
         int salario = atoi(salarioStr); 
-        dataContratacao[strcspn(dataContratacao, "\n")] = '\0';
-        jornadaTrabalho[strcspn(jornadaTrabalho, "\n")] = '\0';
+        retiraQuebraLinha(dataContratacao);
+        retiraQuebraLinha(jornadaTrabalho);
 
         lista = insereFuncionario2(lista, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
 
@@ -280,7 +293,6 @@ Funcionario *ordenaLista(Funcionario *lista)
     return lista;
 }
 
-
 //Função para escrever a lista no arquivo
 void listaEscreveArquivo(Funcionario *lista, FILE *arquivo)
 {
@@ -321,6 +333,12 @@ void liberaFuncionario(Funcionario *l)
 
     }
 }
+
+
+
+
+
+
 /*
 Funcionario *ordenaLista(Funcionario *lista)
 {

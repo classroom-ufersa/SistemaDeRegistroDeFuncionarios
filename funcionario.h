@@ -2,6 +2,8 @@ typedef struct funcionario Funcionario;
 
 Funcionario *criaFuncionario(void);
 
+void retiraQuebraLinha(char *string);
+
 int trataString(char string[21]);
 
 void LimpaBuffer(void);
