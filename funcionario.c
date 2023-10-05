@@ -22,10 +22,25 @@ Funcionario *criaFuncionario(void)
     return NULL;
 }
 
-//Função para corrigir as strings inseridos pelo usuário
-int trataNome(char nome[21])
+/*int trataNome(char nome[21])
 {
-    int i, tamanhoNome = strlen(nome);
+    int i;
+
+    //Verifica se o nome contém caracteres especiais
+    for(i = 0; nome[i] != '\0'; i++){
+        if(!isalpha(nome[i])){
+            printf("Entrada Inválida\n");
+            return 1;
+        }
+    }
+
+    return 0;
+}*/
+
+//Função para corrigir as strings inseridos pelo usuário
+int trataString(char string[21])
+{
+    int i, tamanhoNome = strlen(string);
   
     //Verifica se o nome é muito pequeno
     if(tamanhoNome <= 2){
@@ -34,20 +49,95 @@ int trataNome(char nome[21])
     }
     
     //Verifica se o nome contém caracteres especiais
-    for(i = 0; nome[i] != '\0'; i++){
-        if(!isalnum(nome[i]) && nome[i] != ' ' && nome[i] != '/' && nome[i] != '.'){
+    for(i = 0; string[i] != '\0'; i++){
+        if(!isalnum(string[i]) && string[i] != ' ' && string[i] != '/' && string[i] != '.'){
             printf("Entrada Inválida\n");
             return 1;
         }
     }
     
     //Converte o nome para maiúsculo
-    for(i = 0; nome[i] != '\0'; i++){
-        nome[i] = toupper(nome[i]);
+    for(i = 0; string[i] != '\0'; i++){
+        string[i] = toupper(string[i]);
     }
     
     return 0;
 }
+
+
+Funcionario *insereFuncionario1(Funcionario *lista)
+{
+    char nome[51]; 
+    char documento[51]; 
+    char cargo[51]; 
+    char setor[51]; 
+    int salario = 0, resultado = 0; 
+    char dataContratacao[51]; 
+    char jornadaTrabalho[51]; 
+    Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
+    if(novo == NULL){
+        printf("Erro ao alocar memória\n");
+        exit(1);
+    }
+
+    do
+    {   
+        printf("Informe seu nome: ");
+        scanf(" %[^\n]", nome);
+        resultado = trataString(nome);
+    }while(resultado != 0);
+
+    do
+    {   
+        printf("Informe seu documento: ");
+        scanf(" %[^\n]", documento);
+        resultado = trataString(documento);
+    }while(resultado != 0);
+
+    do
+    {   
+        printf("Informe seu cargo: ");
+        scanf(" %[^\n]", cargo);
+        resultado = trataString(cargo);
+    }while(resultado != 0);
+                            
+    do
+    {   
+        printf("Informe seu setor: ");
+        scanf(" %[^\n]", setor);
+        resultado = trataString(setor);
+    }while(resultado != 0);
+                            
+    printf("Informe seu salário: ");
+    scanf(" %d", &salario);
+
+    do
+    {   
+        printf("Informe sua data de contratação: ");
+        scanf(" %[^\n]", dataContratacao);
+        resultado = trataString(dataContratacao);
+    }while(resultado != 0);
+
+    do
+    {   
+        printf("Informe sua jornada de trabalho: ");
+        scanf(" %[^\n]", jornadaTrabalho);
+        resultado = trataString(jornadaTrabalho);
+    }while(resultado != 0);
+
+    strcpy(novo->nome, nome);
+    strcpy(novo->documento, documento);
+    strcpy(novo->cargo, cargo);
+    strcpy(novo->setor, setor);
+    novo->salario = salario;
+    strcpy(novo->dataContratacao, dataContratacao);
+    strcpy(novo->jornadaTrabalho, jornadaTrabalho);
+
+    novo->proximo = lista;
+
+    return novo;
+}
+
 
 // Função para limpar o buffer
 void LimpaBuffer(void)
@@ -59,7 +149,7 @@ void LimpaBuffer(void)
     } while ((valorLido != '\n') && (valorLido != EOF)); 
 }
 
-Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada)
+Funcionario *insereFuncionario2(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada)
 {
     Funcionario *novo = (Funcionario *) malloc(sizeof(Funcionario));
     if(novo == NULL){
@@ -135,7 +225,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
         dataContratacao[strcspn(dataContratacao, "\n")] = '\0';
         jornadaTrabalho[strcspn(jornadaTrabalho, "\n")] = '\0';
 
-        lista = insereFuncionario(lista, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+        lista = insereFuncionario2(lista, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
 
         LimpaBuffer();
     }   

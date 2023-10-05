@@ -2,11 +2,13 @@ typedef struct funcionario Funcionario;
 
 Funcionario *criaFuncionario(void);
 
-int trataNome(char nome[21]);
+int trataString(char string[21]);
 
 void LimpaBuffer(void);
 
-Funcionario *insereFuncionario(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada);
+Funcionario *insereFuncionario1(Funcionario *lista);
+
+Funcionario *insereFuncionario2(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada);
 
 int quantificaFuncionarios(FILE *arquivo);
 

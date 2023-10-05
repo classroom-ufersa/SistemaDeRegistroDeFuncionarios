@@ -38,53 +38,8 @@ int main()
                         //Repete o laço até 'opcao2' ser igual a 2
                         do
                         {
-                            do
-                            {   
-                                printf("Informe seu nome: ");
-                                scanf(" %[^\n]", nome);
-                                resultado = trataNome(nome);
-                            }while(resultado != 0);
-
-                            do
-                            {   
-                                printf("Informe seu documento: ");
-                                scanf(" %[^\n]", documento);
-                                resultado = trataNome(documento);
-                            }while(resultado != 0);
-
-                            do
-                            {   
-                                printf("Informe seu cargo: ");
-                                scanf(" %[^\n]", cargo);
-                                resultado = trataNome(cargo);
-                            }while(resultado != 0);
-                            
-                            do
-                            {   
-                                printf("Informe seu setor: ");
-                                scanf(" %[^\n]", setor);
-                                resultado = trataNome(setor);
-                            }while(resultado != 0);
-                            
-                            printf("Informe seu salário: ");
-                            scanf(" %f", &salario);
-
-                            do
-                            {   
-                                printf("Informe sua data de contratação: ");
-                                scanf(" %[^\n]", dataContratacao);
-                                resultado = trataNome(dataContratacao);
-                            }while(resultado != 0);
-
-                            do
-                            {   
-                                printf("Informe sua jornada de trabalho: ");
-                                scanf(" %[^\n]", jornadaTrabalho);
-                                resultado = trataNome(jornadaTrabalho);
-                            }while(resultado != 0);
-                            
                             //Insere um novo funcionário na lista
-                            empresa->funcionarios = insereFuncionario(empresa->funcionarios, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+                            empresa->funcionarios = insereFuncionario1(empresa->funcionarios);
 
                             printf("Deseja Continuar Cadastrando?\n");
                             printf("1 - Sim\n");
@@ -102,55 +57,14 @@ int main()
                         //Repete o laço até 'opcao2' ser igual a 2
                         do
                         {
-                            do
-                            {   
-                                printf("Informe seu nome: ");
-                                scanf(" %[^\n]", nome);
-                                resultado = trataNome(nome);
-                            }while(resultado != 0);
-
-                            do
-                            {   
-                                printf("Informe seu documento: ");
-                                scanf(" %[^\n]", documento);
-                                resultado = trataNome(documento);
-                            }while(resultado != 0);
-
-                            do
-                            {   
-                                printf("Informe seu cargo: ");
-                                scanf(" %[^\n]", cargo);
-                                resultado = trataNome(cargo);
-                            }while(resultado != 0);
-                            
-                            do
-                            {   
-                                printf("Informe seu setor: ");
-                                scanf(" %[^\n]", setor);
-                                resultado = trataNome(setor);
-                            }while(resultado != 0);
-                            
-                            printf("Informe seu salário: ");
-                            scanf(" %f", &salario);
-
-                            do
-                            {   
-                                printf("Informe sua data de contratação: ");
-                                scanf(" %[^\n]", dataContratacao);
-                                resultado = trataNome(dataContratacao);
-                            }while(resultado != 0);
-
-                            do
-                            {   
-                                printf("Informe sua jornada de trabalho: ");
-                                scanf(" %[^\n]", jornadaTrabalho);
-                                resultado = trataNome(jornadaTrabalho);
-                            }while(resultado != 0);
+                            //Insere um novo funcionário na lista
+                            empresa->funcionarios = insereFuncionario1(empresa->funcionarios);  
 
                             printf("Deseja Continuar Cadastrando?\n");
                             printf("1 - Sim\n");
                             printf("2 - Não\n");
                             scanf(" %d", &opcao2);
+                            
                     }while(opcao2 != 2);
 
                         //Insere um novo funcionário na lista
