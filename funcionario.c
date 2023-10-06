@@ -414,26 +414,25 @@ Funcionario *buscaFuncionarioPorNomeOuDocumento(Funcionario *lista, char *nomeOu
     }
 
     return resultados;
-*/ //(PEGUEI ESSA FUNÇÂO DA NET)
+*/ 
 
-Lista * lst_retira(Lista*l, int v){
-    Lista* ant = NULL; 
-    Lista* p = l; 
-   
-    while(p->info!=v){
-    	if (p==NULL)
-        	return l;
+Lista *lst_retira(Lista *l, char *str) {
+    Lista *ant = NULL;
+    Lista *p = l;
+
+    while (p != NULL) {
+        if (strcmp(p->info, str) == 0) { 
+            if (ant == NULL)
+                l = p->prox;
+            else
+                ant->prox = p->prox;
+
+            free(p);
+            return l;
+        }
         ant = p;
         p = p->prox;
-
     }
-    
-    if (ant==NULL)
-    
-        l = p->prox;
-    else
-   
-        ant->prox = p->prox;
-    free(p);
-    return l;
+
+    return l; 
 }
