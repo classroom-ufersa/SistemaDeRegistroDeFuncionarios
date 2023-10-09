@@ -335,6 +335,8 @@ void liberaFuncionario(Funcionario *l)
 }
 
 
+int 
+
 
 
 

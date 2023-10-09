@@ -89,6 +89,7 @@ int main()
             break;
 
             case 2:
+
             system("clear");
             break;
 
@@ -105,11 +106,16 @@ int main()
             break;
 
             case 6:
-            system("clear");
+                printf("Receita: %d\n", empresa->receita);
+
+                system("clear");
             break;
 
             case 7:
-            system("clear");
+                //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
+                nfuncionarios = quantificaFuncionarios(arquivo);
+                listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+                system("clear");
             break;
 
             default:
