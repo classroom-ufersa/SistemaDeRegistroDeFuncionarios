@@ -5,8 +5,8 @@
 
 int main()
 {
-    int opcao1 = 0, opcao2 = 0, totalFuncionarios = 0, nfuncionarios = 0;
-
+    int opcao1 = 0, opcao2 = 0, totalFuncionarios = 0, nfuncionarios = 0, resultado = 0;
+    char dado[51];
     Empresa *empresa = criaEmpresa();
     Funcionario *listaArquivo = criaFuncionario();
     Funcionario *listaConcatenada = criaFuncionario();
@@ -29,87 +29,108 @@ int main()
         switch(opcao1)
         {
             case 1:
-                    //Quantifica a quantidade de funcionários no arquivo
-                    nfuncionarios = quantificaFuncionarios(arquivo);
+                //Quantifica a quantidade de funcionários no arquivo
+                nfuncionarios = quantificaFuncionarios(arquivo);
 
-                    //Caso não tenha funcionários registrados no arquivo
-                    if(nfuncionarios == 0){
-                        //Repete o laço até 'opcao2' ser igual a 2
-                        do
-                        {
-                            //Insere um novo funcionário na lista
-                            empresa->funcionarios = insereFuncionario1(empresa->funcionarios);
+                if(nfuncionarios == 0){
+                    do
+                    {
+                        //Insere um novo funcionário na lista
+                        empresa->funcionarios = insereFuncionario1(empresa->funcionarios);
+                        printf("Deseja Continuar Cadastrando?\n");
+                        printf("1 - Sim\n");
+                        printf("2 - Não\n");
+                        scanf(" %d", &opcao2);
+                    }while(opcao2 != 2);
+                    
+                    listaEscreveArquivo(empresa->funcionarios, arquivo);
+                }
 
-                            printf("Deseja Continuar Cadastrando?\n");
-                            printf("1 - Sim\n");
-                            printf("2 - Não\n");
-                            scanf(" %d", &opcao2);
-
-                        }while(opcao2 != 2);
-
-                        //Escreve a lista no arquivo
-                        listaEscreveArquivo(empresa->funcionarios, arquivo);
-                    }
-
-                    //Caso contenha ao menos 1 funcionário registrado no arquivo
-                    else{
-                        //Repete o laço até 'opcao2' ser igual a 2
-                        do
-                        {
-                            //Insere um novo funcionário na lista
-                            empresa->funcionarios = insereFuncionario1(empresa->funcionarios);  
-
-                            printf("Deseja Continuar Cadastrando?\n");
-                            printf("1 - Sim\n");
-                            printf("2 - Não\n");
-                            scanf(" %d", &opcao2);
-
-                        }while(opcao2 != 2);
-
+                else{
+                    do
+                    {
                         //Insere um novo funcionário na lista
                         empresa->funcionarios = insereFuncionario1(empresa->funcionarios);
                         
-                        //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
-                        nfuncionarios = quantificaFuncionarios(arquivo);
-                        listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
-                        
-                        //Concatena as listas
-                        listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
+                        printf("Deseja Continuar Cadastrando?\n");
+                        printf("1 - Sim\n");
+                        printf("2 - Não\n");
+                        scanf(" %d", &opcao2);
+                    }while(opcao2 != 2);
 
-                        //Ordena lista
-                        listaOrdenada = ordenaLista(listaConcatenada);
+                    //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
+                    nfuncionarios = quantificaFuncionarios(arquivo);
+                    listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
 
-                        //Escrever lista ordenada no arquivo
-                        listaEscreveArquivo(listaOrdenada, arquivo);
-                    }
+                    //Concatena as listas
+                    listaConcatenada = concatenaListas(empresa->funcionarios, listaArquivo);
 
-                    //Atualiza a quantidade de funcionários da empresa
-                    empresa->quantFuncionarios++;
-            system("clear");
-            break;
+                    //Ordena lista
+                    listaOrdenada = ordenaLista(listaConcatenada);
+
+                    //Escrever lista ordenada no arquivo
+                    listaEscreveArquivo(listaOrdenada, arquivo);
+                }
+                break;
 
             case 2:
-            system("clear");
-            break;
+                do
+                {   
+                    printf("Informe o nome/documento do funcionário: ");
+                    scanf(" %[^\n]", dado);
+                    resultado = trataString(dado);
+                }while(resultado != 0);
+
+                nfuncionarios = quantificaFuncionarios(arquivo);
+                listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+
+                listaArquivo = listaRetira(listaArquivo, dado);
+                listaEscreveArquivo(listaArquivo, arquivo);
+                break;
 
             case 3:
-            system("clear");
-            break;
+                nfuncionarios = quantificaFuncionarios(arquivo);
+                listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+                imprimeLista(listaArquivo);
+                break;
 
             case 4:
-            system("clear");
-            break;
+                do
+                {   
+                    printf("Informe o nome/documento do funcionário: ");
+                    scanf(" %[^\n]", dado);
+                    resultado = trataString(dado);
+                }while(resultado != 0);
+
+                nfuncionarios = quantificaFuncionarios(arquivo);
+                listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+
+                buscaFuncionario(listaArquivo, dado);
+
+                break;
 
             case 5:
-            system("clear");
-            break;
+                do
+                {   
+                    printf("Informe o nome/documento do funcionário: ");
+                    scanf(" %[^\n]", dado);
+                    resultado = trataString(dado);
+                }while(resultado != 0);
+
+                nfuncionarios = quantificaFuncionarios(arquivo);
+                listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+
+                editarCadastro(listaArquivo, dado);
+
+                listaEscreveArquivo(listaArquivo, arquivo);
+
+                break;
 
             case 6:
-            system("clear");
-            break;
+                printf("Receita: %d\n", empresa->receita);
+                break;
 
             case 7:
-            system("clear");
             break;
 
             default:
