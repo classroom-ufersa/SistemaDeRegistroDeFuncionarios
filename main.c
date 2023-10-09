@@ -5,7 +5,7 @@
 
 int main()
 {
-    int opcao1 = 0, opcao2 = 0, totalFuncionarios = 0, nfuncionarios = 0, resultado = 0;
+    int opcao1 = 0, opcao2 = 0, totalFuncionarios = 0, nfuncionarios = 0, resultado = 0, quantidadeCargos = 0;
     char dado[51];
     Empresa *empresa = criaEmpresa();
     Funcionario *listaArquivo = criaFuncionario();
@@ -128,10 +128,33 @@ int main()
 
             case 6:
                 printf("Receita: %d\n", empresa->receita);
+
                 break;
 
             case 7:
-            break;
+                nfuncionarios = quantificaFuncionarios(arquivo);
+                listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+                
+                quantidadeCargos = quantificaCargo(listaArquivo, "GERENTE");
+                printf("Quantidade de Gerentes: %d\n", quantidadeCargos);
+                quantidadeCargos = 0;
+
+                quantidadeCargos = quantificaCargo(listaArquivo, "ANALISTA");
+                printf("Quantidade de Analistas: %d\n", quantidadeCargos);
+                quantidadeCargos = 0;
+
+                quantidadeCargos = quantificaCargo(listaArquivo, "ASSISTENTE");
+                printf("Quantidade de Assistentes: %d\n", quantidadeCargos);
+                quantidadeCargos = 0;
+
+                quantidadeCargos = quantificaCargo(listaArquivo, "DESENVOLVEDOR");
+                printf("Quantidade de Desenvolvedores: %d\n", quantidadeCargos);
+                quantidadeCargos = 0;
+
+                quantidadeCargos = quantificaCargo(listaArquivo, "ESTAGIARIO");
+                printf("Quantidade de Estagiários: %d\n", quantidadeCargos);
+
+                break;
 
             default:
             if(opcao1 != 8){

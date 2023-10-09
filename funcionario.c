@@ -470,3 +470,17 @@ Funcionario *editarCadastro(Funcionario *lista, char *string)
 
     printf("Funcionário não encontrado.\n");
 }
+
+int quantificaCargo(Funcionario *lista, char *string)
+{
+    Funcionario *p;
+    int quantidade = 0; 
+
+    for(p = lista; p != NULL; p = p->proximo){
+        if(strcmp(p->cargo, string) == 0){
+            quantidade++;
+        }
+    }
+
+    return quantidade;
+}

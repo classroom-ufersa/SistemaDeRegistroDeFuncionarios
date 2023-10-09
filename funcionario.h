@@ -14,9 +14,9 @@ Funcionario *insereFuncionario2(Funcionario *lista, char *nome, char *documento,
 
 int quantificaFuncionarios(FILE *arquivo);
 
-FuncionariolistaLerArquivo(FILE *arquivo, int nfuncionarios);
+Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios);
 
-FuncionarioconcatenaListas(Funcionario *lista1, Funcionario *lista2);
+Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2);
 
 Funcionario *ordenaLista(Funcionario *lista);
 
@@ -39,3 +39,5 @@ void imprimeFuncionario(Funcionario *lista, char *string);
 void buscaFuncionario(Funcionario *lista, char *string);
 
 Funcionario *editarCadastro(Funcionario *lista, char *string);
+
+int quantificaCargo(Funcionario *lista, char *string);
