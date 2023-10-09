@@ -212,7 +212,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
     char documento[51]; 
     char cargo[51]; 
     char setor[51]; 
-    char salarioStr[51]; 
+    int salario; 
     char dataContratacao[51]; 
     char jornadaTrabalho[51]; 
     arquivo = fopen("funcionarios.txt", "r");
@@ -223,20 +223,25 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
 
     for(i = 0; i < nfuncionarios; i++){
         fgets(nome, 51, arquivo);
-        fgets(documento, 51, arquivo);
-        fgets(cargo, 51, arquivo);
-        fgets(setor, 51, arquivo);
-        fgets(salarioStr, 51, arquivo); 
-        fgets(dataContratacao, 51, arquivo);
-        fgets(jornadaTrabalho, 51, arquivo);
+        nome[strcspn(nome, "\n")] = '\0';
 
-        retiraQuebraLinha(nome);
-        retiraQuebraLinha(documento);
-        retiraQuebraLinha(cargo);
-        retiraQuebraLinha(setor);
-        int salario = atoi(salarioStr); 
-        retiraQuebraLinha(dataContratacao);
-        retiraQuebraLinha(jornadaTrabalho);
+        fgets(documento, 51, arquivo);
+        documento[strcspn(documento, "\n")] = '\0';
+
+        fgets(cargo, 51, arquivo);
+        cargo[strcspn(cargo, "\n")] = '\0';
+
+        fgets(setor, 51, arquivo);
+        setor[strcspn(setor, "\n")] = '\0';
+
+        fscanf(arquivo, "%d", &salario);
+
+        fgets(dataContratacao, 51, arquivo);
+        dataContratacao[strcspn(dataContratacao, "\n")] = '\0';
+
+        fgets(jornadaTrabalho, 51, arquivo);
+        jornadaTrabalho[strcspn(jornadaTrabalho, "\n")] = '\0';
+
 
         lista = insereFuncionario2(lista, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
 
@@ -313,7 +318,7 @@ void listaEscreveArquivo(Funcionario *lista, FILE *arquivo)
     fclose(arquivo);
 }
 
-void imprimeLista(Funcionario *l)// Função para imprimir a lista de funcionários
+void imprimeLista(Funcionario *l)
 {
 	Funcionario* p;
 
@@ -334,105 +339,134 @@ void liberaFuncionario(Funcionario *l)
     }
 }
 
-
-
-
-
-
-/*
-Funcionario *ordenaLista(Funcionario *lista)
+Funcionario *listaRetira(Funcionario *l, char *string)
 {
-    Funcionario *i = NULL;
-    Funcionario *j = NULL;
-
-    if (lista == NULL) {
-        printf("Lista Vazia\n");
-        return lista;
-    } else {
-        for (i = lista; i->proximo != NULL; i = i->proximo) {
-            Funcionario *menor = i;
-            for (j = i->proximo; j != NULL; j = j->proximo) {
-                if (strcmp(j->nome, menor->nome) < 0) {
-                    menor = j;
-                }
-            }
-            if (i != menor) {
-                Funcionario temp;
-                memcpy(&temp, i, sizeof(Funcionario));
-                memcpy(i, menor, sizeof(Funcionario));
-                memcpy(menor, &temp, sizeof(Funcionario));
-            }
-        }
-    }
-
-    return lista;
-}
-*/
-/*
-Funcionario *excluiFuncionarioPorNome(Funcionario *lista, char *nome)
-{
-    Funcionario *atual = lista;
-    Funcionario *anterior = NULL;
-    
-    while (atual != NULL) {
-        if (strcmp(atual->nome, nome) == 0) {
-            if (anterior != NULL) {
-                anterior->proximo = atual->proximo;
-            } else {
-                lista = atual->proximo;
-            }
-            free(atual);
-            return lista; // Retorna a lista atualizada após a exclusão
-        }
-        anterior = atual;
-        atual = atual->proximo;
-    }
-    
-    return lista; // Retorna a lista original se o funcionário não for encontrado
-}
-*/
-/*
-#include <stdbool.h>
-
-Funcionario *buscaFuncionarioPorNomeOuDocumento(Funcionario *lista, char *nomeOuDocumento)
-{
-    Funcionario *atual = lista;
-    Funcionario *resultados = NULL; // Lista para armazenar os resultados
-    bool encontrou = false; // Flag para indicar se foi encontrado pelo menos um funcionário
-
-    while (atual != NULL) {
-        if (strcmp(atual->nome, nomeOuDocumento) == 0 || strcmp(atual->documento, nomeOuDocumento) == 0) {
-            // Se o nome ou documento corresponderem, adiciona o funcionário aos resultados
-            resultados = insereFuncionario(resultados, atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
-            encontrou = true; // Indica que pelo menos um funcionário foi encontrado
-        }
-        atual = atual->proximo;
-    }
-
-    if (!encontrou) {
-        printf("Nenhum funcionário encontrado com o nome ou documento especificado.\n");
-    }
-
-    return resultados;
-*/ 
-
-Lista *lst_retira(Lista *l, char *str) {
-    Lista *ant = NULL;
-    Lista *p = l;
+    Funcionario  *ant = NULL;
+    Funcionario  *p = l;
 
     while (p != NULL) {
-        if (strcmp(p->info, str) == 0) { 
+        if (strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0) { 
             if (ant == NULL)
-                l = p->prox;
+                l = p->proximo;
             else
-                ant->prox = p->prox;
+                ant->proximo = p->proximo;
 
             free(p);
             return l;
         }
         ant = p;
-        p = p->prox;
+        p = p->proximo;
     }
 
     return l; 
+}
+
+void imprimeFuncionario(Funcionario *lista, char *string)
+{
+    Funcionario * p;
+	for(p = lista; p != NULL; p = p->proximo){
+		if(strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0)
+        printf("Nome: %s\nDocumento: %s\nCargo: %s\nSetor: %s\nSalário: %d\nData de Contratação: %s\nJornada de Trabalho: %s\n", p->nome, p->documento, p->cargo, p->setor, p->salario, p->dataContratacao, p->jornadaTrabalho);
+	}
+}
+
+void buscaFuncionario(Funcionario *lista, char *string)
+{
+    Funcionario *p;
+    int encontrado = 0; 
+
+    for(p = lista; p != NULL; p = p->proximo){
+        if(strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0){
+            printf("Funcionário Encontrado\n");
+            encontrado = 1; 
+            break; 
+        }
+    }
+
+    if(!encontrado){
+        printf("Funcionário Não Encontrado\n");
+    }
+}
+
+Funcionario *editarCadastro(Funcionario *lista, char *string)
+{
+    Funcionario *p;
+
+    for (p = lista; p != NULL; p = p->proximo) {
+        if (strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0) {
+            printf("Funcionário encontrado. Edite as informações:\n");
+
+            char novoNome[51];
+            char novoDocumento[51];
+            char novoCargo[51];
+            char novoSetor[51];
+            int novoSalario;
+            char novaDataContratacao[51];
+            char novaJornadaTrabalho[51];
+
+            do {
+                printf("Informe o novo nome: ");
+                scanf(" %[^\n]", novoNome);
+                if (trataString(novoNome) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoNome) != 0);
+
+            do {
+                printf("Informe o novo documento: ");
+                scanf(" %[^\n]", novoDocumento);
+                if (trataString(novoDocumento) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoDocumento) != 0);
+
+            do {
+                printf("Informe o novo cargo: ");
+                scanf(" %[^\n]", novoCargo);
+                if (trataString(novoCargo) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoCargo) != 0);
+
+            do {
+                printf("Informe o novo setor: ");
+                scanf(" %[^\n]", novoSetor);
+                if (trataString(novoSetor) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoSetor) != 0);
+
+            printf("Informe o novo salário: ");
+            scanf("%d", &novoSalario);
+
+            do {
+                printf("Informe a nova data de contratação: ");
+                scanf(" %[^\n]", novaDataContratacao);
+                if (trataString(novaDataContratacao) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novaDataContratacao) != 0);
+
+            do {
+                printf("Informe a nova jornada de trabalho: ");
+                scanf(" %[^\n]", novaJornadaTrabalho);
+                if (trataString(novaJornadaTrabalho) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novaJornadaTrabalho) != 0);
+
+            // Atualize as informações do funcionário
+            strcpy(p->nome, novoNome);
+            strcpy(p->documento, novoDocumento);
+            strcpy(p->cargo, novoCargo);
+            strcpy(p->setor, novoSetor);
+            p->salario = novoSalario;
+            strcpy(p->dataContratacao, novaDataContratacao);
+            strcpy(p->jornadaTrabalho, novaJornadaTrabalho);
+
+            printf("Informações atualizadas com sucesso.\n");
+        }
+    }
+
+    printf("Funcionário não encontrado.\n");
 }
