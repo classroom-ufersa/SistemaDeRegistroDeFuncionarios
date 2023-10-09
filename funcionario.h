@@ -26,3 +26,10 @@ void liberaFuncionario(Funcionario *l);
 
 void imprimeLista(Funcionario *l);
 
+Funcionario *listaRetira(Funcionario *l, char *string);
+
+void imprimeFuncionario(Funcionario *lista, char *string);
+
+void buscaFuncionario(Funcionario *lista, char *string);
+
+Funcionario *editarCadastro(Funcionario *lista, char *string);
