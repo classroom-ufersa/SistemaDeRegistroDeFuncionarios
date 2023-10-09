@@ -360,3 +360,113 @@ Funcionario *listaRetira(Funcionario *l, char *string)
 
     return l; 
 }
+
+void imprimeFuncionario(Funcionario *lista, char *string)
+{
+    Funcionario * p;
+	for(p = lista; p != NULL; p = p->proximo){
+		if(strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0)
+        printf("Nome: %s\nDocumento: %s\nCargo: %s\nSetor: %s\nSalário: %d\nData de Contratação: %s\nJornada de Trabalho: %s\n", p->nome, p->documento, p->cargo, p->setor, p->salario, p->dataContratacao, p->jornadaTrabalho);
+	}
+}
+
+void buscaFuncionario(Funcionario *lista, char *string)
+{
+    Funcionario *p;
+    int encontrado = 0; 
+
+    for(p = lista; p != NULL; p = p->proximo){
+        if(strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0){
+            printf("Funcionário Encontrado\n");
+            encontrado = 1; 
+            break; 
+        }
+    }
+
+    if(!encontrado){
+        printf("Funcionário Não Encontrado\n");
+    }
+}
+
+Funcionario *editarCadastro(Funcionario *lista, char *string)
+{
+    Funcionario *p;
+
+    for (p = lista; p != NULL; p = p->proximo) {
+        if (strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0) {
+            printf("Funcionário encontrado. Edite as informações:\n");
+
+            char novoNome[51];
+            char novoDocumento[51];
+            char novoCargo[51];
+            char novoSetor[51];
+            int novoSalario;
+            char novaDataContratacao[51];
+            char novaJornadaTrabalho[51];
+
+            do {
+                printf("Informe o novo nome: ");
+                scanf(" %[^\n]", novoNome);
+                if (trataString(novoNome) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoNome) != 0);
+
+            do {
+                printf("Informe o novo documento: ");
+                scanf(" %[^\n]", novoDocumento);
+                if (trataString(novoDocumento) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoDocumento) != 0);
+
+            do {
+                printf("Informe o novo cargo: ");
+                scanf(" %[^\n]", novoCargo);
+                if (trataString(novoCargo) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoCargo) != 0);
+
+            do {
+                printf("Informe o novo setor: ");
+                scanf(" %[^\n]", novoSetor);
+                if (trataString(novoSetor) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novoSetor) != 0);
+
+            printf("Informe o novo salário: ");
+            scanf("%d", &novoSalario);
+
+            do {
+                printf("Informe a nova data de contratação: ");
+                scanf(" %[^\n]", novaDataContratacao);
+                if (trataString(novaDataContratacao) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novaDataContratacao) != 0);
+
+            do {
+                printf("Informe a nova jornada de trabalho: ");
+                scanf(" %[^\n]", novaJornadaTrabalho);
+                if (trataString(novaJornadaTrabalho) != 0) {
+                    printf("Entrada Inválida\n");
+                }
+            } while (trataString(novaJornadaTrabalho) != 0);
+
+            // Atualize as informações do funcionário
+            strcpy(p->nome, novoNome);
+            strcpy(p->documento, novoDocumento);
+            strcpy(p->cargo, novoCargo);
+            strcpy(p->setor, novoSetor);
+            p->salario = novoSalario;
+            strcpy(p->dataContratacao, novaDataContratacao);
+            strcpy(p->jornadaTrabalho, novaJornadaTrabalho);
+
+            printf("Informações atualizadas com sucesso.\n");
+        }
+    }
+
+    printf("Funcionário não encontrado.\n");
+}
