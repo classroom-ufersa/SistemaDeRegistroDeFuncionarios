@@ -1,30 +1,38 @@
 typedef struct funcionario Funcionario;
 
-Funcionario *criaFuncionario(void);
+Funcionario criaFuncionario(void);
 
-void retiraQuebraLinha(char *string);
+void retiraQuebraLinha(charstring);
 
 int trataString(char string[21]);
 
 void LimpaBuffer(void);
 
-Funcionario *insereFuncionario1(Funcionario *lista);
+Funcionario insereFuncionario1(Funcionariolista);
 
-Funcionario *insereFuncionario2(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada);
+Funcionario insereFuncionario2(Funcionariolista, char nome, chardocumento, char cargo, charsetor, int salario, char data, charjornada);
 
-int quantificaFuncionarios(FILE *arquivo);
+int quantificaFuncionarios(FILE arquivo);
 
-Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios);
+FuncionariolistaLerArquivo(FILE arquivo, int nfuncionarios);
 
-Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2);
+FuncionarioconcatenaListas(Funcionario lista1, Funcionariolista2);
 
-Funcionario *ordenaLista(Funcionario *lista);
+Funcionario ordenaLista(Funcionariolista);
 
-void listaEscreveArquivo(Funcionario *lista, FILE *arquivo);
+void listaEscreveArquivo(Funcionario lista, FILEarquivo);
 
-void liberaFuncionario(Funcionario *l);
+void liberaFuncionario(Funcionario l);
 
-void imprimeLista(Funcionario *l);
+void imprimeLista(Funcionariol);
+
+Funcionario listaRetira(Funcionariol, char string);
+
+void imprimeFuncionario(Funcionariolista, char string);
+
+void buscaFuncionario(Funcionariolista, char string);
+
+FuncionarioeditarCadastro(Funcionario lista, charstring);
 
 Funcionario *listaRetira(Funcionario *l, char *string);
 
