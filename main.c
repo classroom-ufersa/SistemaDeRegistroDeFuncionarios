@@ -42,8 +42,12 @@ int main()
                         printf("2 - Não\n");
                         scanf(" %d", &opcao2);
                     }while(opcao2 != 2);
+
+                    empresa->funcionarios = ordenaLista(empresa->funcionarios);
                     
                     listaEscreveArquivo(empresa->funcionarios, arquivo);
+
+                    liberaFuncionario(empresa->funcionarios);
                 }
 
                 else{
@@ -70,7 +74,11 @@ int main()
 
                     //Escrever lista ordenada no arquivo
                     listaEscreveArquivo(listaOrdenada, arquivo);
+
+                    liberaFuncionario(listaOrdenada);
                 }
+
+
                 break;
 
             case 2:
@@ -91,7 +99,11 @@ int main()
             case 3:
                 nfuncionarios = quantificaFuncionarios(arquivo);
                 listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+                
+                listaArquivo = ordenaLista(listaArquivo);
                 imprimeLista(listaArquivo);
+
+                liberaFuncionario(listaArquivo);
                 break;
 
             case 4:
@@ -135,33 +147,33 @@ int main()
                 nfuncionarios = quantificaFuncionarios(arquivo);
                 listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
                 
+                printf("Quantitativo de Funcionário Por Cargos:\n");
                 quantidadeCargos = quantificaCargo(listaArquivo, "GERENTE");
-                printf("Quantidade de Gerentes: %d\n", quantidadeCargos);
+                printf("Gerentes: %d\n", quantidadeCargos);
                 quantidadeCargos = 0;
 
                 quantidadeCargos = quantificaCargo(listaArquivo, "ANALISTA");
-                printf("Quantidade de Analistas: %d\n", quantidadeCargos);
+                printf("Analistas: %d\n", quantidadeCargos);
                 quantidadeCargos = 0;
 
                 quantidadeCargos = quantificaCargo(listaArquivo, "ASSISTENTE");
-                printf("Quantidade de Assistentes: %d\n", quantidadeCargos);
+                printf("Assistentes: %d\n", quantidadeCargos);
                 quantidadeCargos = 0;
 
                 quantidadeCargos = quantificaCargo(listaArquivo, "DESENVOLVEDOR");
-                printf("Quantidade de Desenvolvedores: %d\n", quantidadeCargos);
+                printf("Desenvolvedores: %d\n", quantidadeCargos);
                 quantidadeCargos = 0;
 
                 quantidadeCargos = quantificaCargo(listaArquivo, "ESTAGIARIO");
-                printf("Quantidade de Estagiários: %d\n", quantidadeCargos);
+                printf("Estagiários: %d\n", quantidadeCargos);
 
                 break;
 
             default:
-            if(opcao1 != 8){
+                if(opcao1 != 8){
                 printf("Opção Inválida\n");
-            }
-
-            break;
+                }
+                break;
         }
     }while(opcao1 != 8);
     liberaFuncionario(listaOrdenada);

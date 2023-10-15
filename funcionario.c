@@ -222,35 +222,39 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
     }
 
     for(i = 0; i < nfuncionarios; i++){
-        fgets(nome, 51, arquivo);
+        fgets(nome, sizeof(nome), arquivo);
         nome[strcspn(nome, "\n")] = '\0';
 
-        fgets(documento, 51, arquivo);
+        fgets(documento, sizeof(documento), arquivo);
         documento[strcspn(documento, "\n")] = '\0';
 
-        fgets(cargo, 51, arquivo);
+        fgets(cargo, sizeof(cargo), arquivo);
         cargo[strcspn(cargo, "\n")] = '\0';
 
-        fgets(setor, 51, arquivo);
+        fgets(setor, sizeof(setor), arquivo);
         setor[strcspn(setor, "\n")] = '\0';
 
-        fscanf(arquivo, "%d", &salario);
+        if (fscanf(arquivo, "%d", &salario) != 1) {
+            printf("Erro ao ler o salário do funcionário %d\n", i);
+            exit(1);
+        }
+        fgetc(arquivo);
 
-        fgets(dataContratacao, 51, arquivo);
+        fgets(dataContratacao, sizeof(dataContratacao), arquivo);
         dataContratacao[strcspn(dataContratacao, "\n")] = '\0';
 
-        fgets(jornadaTrabalho, 51, arquivo);
+        fgets(jornadaTrabalho, sizeof(jornadaTrabalho), arquivo);
         jornadaTrabalho[strcspn(jornadaTrabalho, "\n")] = '\0';
 
-
         lista = insereFuncionario2(lista, nome, documento, cargo, setor, salario, dataContratacao, jornadaTrabalho);
+    }
 
-        LimpaBuffer();
-    }   
-    
+    LimpaBuffer();
+
     fclose(arquivo);
     return lista;
 }
+
 
 //função para concatenar as listas
 Funcionario *concatenaListas(Funcionario *lista1, Funcionario *lista2)
@@ -301,18 +305,17 @@ Funcionario *ordenaLista(Funcionario *lista)
 //Função para escrever a lista no arquivo
 void listaEscreveArquivo(Funcionario *lista, FILE *arquivo)
 {
-    Funcionario *atual = lista;
-
     arquivo = fopen("funcionarios.txt", "w");
     if (arquivo == NULL) {
         printf("Erro ao abrir arquivo\n");
         exit(1);
     }
 
+    Funcionario *atual = lista;
+
     while (atual != NULL) {
         fprintf(arquivo, "%s\n%s\n%s\n%s\n%d\n%s\n%s\n", atual->nome, atual->documento, atual->cargo, atual->setor, atual->salario, atual->dataContratacao, atual->jornadaTrabalho);
         atual = atual->proximo;
-        LimpaBuffer();
     }
 
     fclose(arquivo);
@@ -378,6 +381,7 @@ void buscaFuncionario(Funcionario *lista, char *string)
     for(p = lista; p != NULL; p = p->proximo){
         if(strcmp(p->nome, string) == 0 || strcmp(p->documento, string) == 0){
             printf("Funcionário Encontrado\n");
+            printf("Nome: %s\nDocumento: %s\nCargo: %s\nSetor: %s\nSalário: %d\nData de Contratação: %s\nJornada de Trabalho: %s\n", p->nome, p->documento, p->cargo, p->setor, p->salario, p->dataContratacao, p->jornadaTrabalho);
             encontrado = 1; 
             break; 
         }
