@@ -29,7 +29,7 @@ Empresa *criaEmpresa(void)
 
     //Inicialização dos campos com valores padrão
     strcpy(empresa->cnpj, "12.345.678/0001-90");
-    strcpy(empresa->nome, "Empresa");
+    strcpy(empresa->nome, "TechSolutions Inc");
     strcpy(empresa->localizacao, "Pau dos Ferros");
     empresa->quantFuncionarios = 0;
     empresa->funcionarios = criaFuncionario();
