@@ -58,9 +58,9 @@ Empresa *criaEmpresa(void)
 
 //Função para imprimir informações sobre a Empresa
 void imprimeEmpresa(Empresa *empresa)
-{
+{   
+    printf("Empresa: %s\n", empresa->nome);
     printf("CNPJ: %s\n", empresa->cnpj);
-    printf("Nome: %s\n", empresa->nome);
     printf("Localização: %s\n", empresa->localizacao);
     printf("Quantidade de Funcionários: %d\n", empresa->quantFuncionarios);
     printf("Receita: R$ %d\n", empresa->receita);

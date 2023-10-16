@@ -3,6 +3,9 @@ typedef struct funcionario Funcionario;
 //Função para criar uma lista de funcionários
 Funcionario *criaFuncionario(void);
 
+//Função para criar o arquivo caso não exista
+void criarArquivo(char *nomeArquivo);
+
 //Função para limpar o buffer
 void LimpaBuffer(void);
 
@@ -16,7 +19,7 @@ int quantificaFuncionarios(FILE *arquivo);
 Funcionario *insereFuncionario(Funcionario *lista);
 
 //Função para receber os dados de um arquivo e criar um novo funcionário
-Funcionario *insereFuncionarioArquivo(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, float salario, char *data, char *jornada);
+Funcionario *insereFuncionarioArquivo(Funcionario *lista, char *nome, char *documento, char *cargo, char *setor, int salario, char *data, char *jornada);
 
 //Função para ler os dados do arquivo
 Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios);

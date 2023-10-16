@@ -34,6 +34,7 @@ int main()
         {
             case 1:
 
+                criarArquivo("funcionarios.txt");
 
                 //Quantifica a quantidade de funcionários no arquivo
                 nfuncionarios = quantificaFuncionarios(arquivo);
@@ -92,8 +93,11 @@ int main()
                     liberaFuncionario(listaOrdenada);
                 }
 
+                //Zera o valor de opcao1
                 opcao1 = 0;
 
+                //Atualiza a quantidade de funcionários
+                empresa->quantFuncionarios = nfuncionarios+1;
                 break;
 
             case 2:
@@ -237,6 +241,9 @@ int main()
         }
 
     }while(opcao1 != 8);
+
+    //Imprime os dados da empresa
+    imprimeEmpresa(empresa);
 
     //Libera a empresa
     liberaEmpresa(empresa);

@@ -8,5 +8,6 @@ Empresa *criaEmpresa(void);
 void imprimeEmpresa(Empresa *empresa);
 
 //Função para liberar a memória alocada para a Empresa
+
 void liberaEmpresa(Empresa *empresa);
 
