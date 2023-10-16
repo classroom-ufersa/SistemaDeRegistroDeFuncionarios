@@ -24,8 +24,6 @@ Funcionario *criaFuncionario(void)
     return NULL;
 }
 
-
-
 //Função para limpar o buffer
 void LimpaBuffer(void)
 {
