@@ -13,9 +13,6 @@ int main()
     Funcionario *listaOrdenada = criaFuncionario();
     FILE *arquivo = NULL;
 
-    //Imprime as informações da empresa
-    //imprimeEmpresa(empresa);
-
     //Laço de repetição para voltar ao menu de opções
     do
     {   
