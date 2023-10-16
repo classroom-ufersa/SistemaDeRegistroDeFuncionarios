@@ -274,6 +274,7 @@ Funcionario *listaLerArquivo(FILE *arquivo, int nfuncionarios)
         
         //Lê o salário do funcionário
         fscanf(arquivo, "%d", &salario);
+        getc(arquivo);
 
         //Lê a data de contratação do funcionário
         fgets(dataContratacao, sizeof(dataContratacao), arquivo);
@@ -379,7 +380,6 @@ Funcionario *ordenaLista(Funcionario *lista)
     return lista;
 }
 
-
 //Função para retirar um funcionário da lista
 Funcionario *listaRetira(Funcionario *l, char *string)
 {
@@ -414,7 +414,6 @@ Funcionario *listaRetira(Funcionario *l, char *string)
     //Retorna a lista original se o elemento não for encontrado
     return l; 
 }
-
 
 //Função para imprimir os dados de um funcionário
 void imprimeFuncionario(Funcionario *lista, char *string)

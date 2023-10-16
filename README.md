@@ -33,7 +33,7 @@ printf("7. Consultar Quantitativo de Funcionário Por Cargos\n");
 printf("8. Sair\n");
 ```
 
-###  2. TAD empresa.c
+###  2. TAD empresa
 Essa TAD oferece as seguintes funções:
 ```
 //Função para criar a empresa
@@ -45,7 +45,7 @@ void imprimeEmpresa(Empresa *empresa);
 //Função para liberar a memória alocada para a Empresa
 void liberaEmpresa(Empresa *empresa);
 ```
-###  3. TAD funcionario.c
+###  3. TAD funcionario
 Essa TAD ofecere as seguintes funções:
 ```
 //Função para criar uma lista de funcionários

@@ -60,9 +60,9 @@ int main()
                     //Libera a lista
                     liberaFuncionario(empresa->funcionarios);
                 }
-
                 //Caso tenha ao menos um funcionário no arquivo
                 else{
+                    opcao2 = 0;
                     do
                     {
                         //Insere um novo funcionário na lista
@@ -90,14 +90,13 @@ int main()
                     listaEscreveArquivo(listaOrdenada, arquivo);
                     
                     //Libera a lista
-                    liberaFuncionario(listaOrdenada);
+                    liberaFuncionario(listaOrdenada); 
                 }
 
-                //Zera o valor de opcao1
-                opcao1 = 0;
 
                 //Atualiza a quantidade de funcionários
                 empresa->quantFuncionarios = nfuncionarios+1;
+                system("clear");
                 break;
 
             case 2:
@@ -133,6 +132,9 @@ int main()
 
                 //Copia os dados dos funcionários do arquivo, e cria uma lista com esses dados
                 listaArquivo = listaLerArquivo(arquivo, nfuncionarios);
+
+                //Ordena a lista
+                listaOrdenada = ordenaLista(listaArquivo);
                 
                 //Imprime a lista
                 imprimeLista(listaArquivo);
@@ -163,7 +165,7 @@ int main()
 
                 //Libera a lista
                 liberaFuncionario(listaArquivo);
-
+                
                 break;
 
             case 5:
