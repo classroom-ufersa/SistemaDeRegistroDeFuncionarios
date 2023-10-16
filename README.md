@@ -17,10 +17,10 @@ A problemática deste projeto gira em torno da necessidade de desenvolver um Sis
 - Algoritmo de Ordenação
 - Lista Encadeada Simples
 
-# Estrutura do Sistema
+# Estrutura do Sistema:
 O sistema é composto por duas "TAD's" (Tipos Abstratos de Dados) representados pelos arquivos empresa.c e funcionario.c Esses elementos permitem o cadastro, edição, busca e listagem eficientes das informações dos funcionários em uma empresa.
 
-## O sistema utiliza o seguinte menu de interações
+###  O sistema utiliza o seguinte menu de interações
 ```
 printf("\n========== MENU ==========\n");
 printf("1. Cadastrar Funcionário\n");
@@ -33,7 +33,7 @@ printf("7. Consultar Quantitativo de Funcionário Por Cargos\n");
 printf("8. Sair\n");
 ```
 
-## TAD empresa.c
+###  TAD empresa.c
 Essa TAD oferece as seguintes funções:
 ```
 //Função para criar a empresa
@@ -45,7 +45,7 @@ void imprimeEmpresa(Empresa *empresa);
 //Função para liberar a memória alocada para a Empresa
 void liberaEmpresa(Empresa *empresa);
 ```
-## TAD funcionario.c
+###  TAD funcionario.c
 Essa TAD ofecere as seguintes funções:
 ```
 //Função para criar uma lista de funcionários
